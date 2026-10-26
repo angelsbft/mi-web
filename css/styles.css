@@ -402,8 +402,8 @@ p { margin: 0 0 1em; }
    (0% = izquierda/arriba, 100% = derecha/abajo). --photo-zoom: 1 = sin zoom. */
 .about__frame {
   --photo-x: 50%;
-  --photo-y: 75%;
-  --photo-zoom: 1.3;
+  --photo-y: 0%;
+  --photo-zoom: 1;
   position: relative;
   z-index: 1;
   height: 100%;
