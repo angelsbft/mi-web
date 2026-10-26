@@ -397,7 +397,24 @@ p { margin: 0 0 1em; }
   border: 2px dashed var(--border);
 }
 .about__placeholder .icon { width: 90px; height: 90px; color: var(--primary); opacity: .5; }
-.about__photo img { object-position: center top; }
+/* Encuadre de la foto: ajusta estos 3 valores para moverla o acercarla.
+   --photo-x / --photo-y: punto de la foto que queda fijo al hacer zoom
+   (0% = izquierda/arriba, 100% = derecha/abajo). --photo-zoom: 1 = sin zoom. */
+.about__frame {
+  --photo-x: 50%;
+  --photo-y: 75%;
+  --photo-zoom: 1.3;
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+}
+.about__frame img {
+  border-radius: 0;
+  transform: scale(var(--photo-zoom));
+  transform-origin: var(--photo-x) var(--photo-y);
+}
 .about__content p { color: var(--muted); }
 .about__list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
 .about__list li { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .9rem; font-weight: 500; }
