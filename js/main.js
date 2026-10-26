@@ -4,7 +4,7 @@
    solo números, sin "+", espacios ni guiones.
    Ejemplo Chile: 56912345678 · Colombia: 573001234567
    ========================================================= */
-const WHATSAPP_NUMBER = "56900000000";
+const WHATSAPP_NUMBER = "573156942956";
 
 document.documentElement.classList.add("js");
 

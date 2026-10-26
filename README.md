@@ -4,7 +4,7 @@ Sitio estático (HTML, CSS y JS sin dependencias) para **sabfit.online**.
 
 ## Antes de publicar
 
-1. **Número de WhatsApp**: abre `js/main.js` y cambia `WHATSAPP_NUMBER` por tu número con código de país, solo dígitos (ej. `56912345678`).
+1. **Número de WhatsApp**: abre `js/main.js` y `WHATSAPP_NUMBER` ya tiene tu número (+57 315 694 2956); cámbialo aquí si algún día usas otro con código de país, solo dígitos (ej. `56912345678`).
 2. **Tu foto**: guarda tu imagen en `img/foto.jpg` y, en `index.html` (sección "Sobre mí"), reemplaza el bloque `about__placeholder` por:
    ```html
    <img src="img/foto.jpg" alt="Tu nombre, coach de SabFit" loading="lazy">
