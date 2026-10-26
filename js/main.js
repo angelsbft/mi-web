@@ -100,4 +100,248 @@ form.addEventListener("submit", (e) => {
   window.open(whatsappUrl(text), "_blank", "noopener");
 });
 
+// Test "¿Qué plan es para ti?"
+// Cada opción suma puntos a nutrición (n) y/o entrenamiento (t).
+// El resultado (perfil) depende de la respuesta a la primera pregunta.
+const QUIZ_QUESTIONS = [
+  {
+    question: "¿Cuál es tu objetivo principal?",
+    options: [
+      { emoji: "🔥", text: "Bajar de peso / grasa", n: 2, t: 2, profile: "fat" },
+      { emoji: "💪", text: "Ganar masa muscular", n: 1, t: 2, profile: "muscle" },
+      { emoji: "🌱", text: "Mejorar mi salud y energía", n: 2, t: 1, profile: "health" },
+      { emoji: "🏃", text: "Rendir más en mi deporte", n: 1, t: 2, profile: "sport" },
+      { emoji: "🧠", text: "Mejorar mi relación con la comida", n: 3, t: 0, profile: "habits" },
+      { emoji: "✨", text: "Tonificar y sentirme mejor", n: 1, t: 2, profile: "tone" },
+    ],
+  },
+  {
+    question: "¿Cómo describirías tu alimentación hoy?",
+    options: [
+      { emoji: "🍔", text: "Desordenada, como lo que puedo", n: 3, t: 0 },
+      { emoji: "😅", text: "Más o menos, a veces bien y a veces no", n: 2, t: 0 },
+      { emoji: "🥗", text: "Bastante buena, pero quiero optimizarla", n: 1, t: 0 },
+      { emoji: "🔄", text: "He probado muchas dietas sin éxito", n: 3, t: 0 },
+    ],
+  },
+  {
+    question: "¿Cuánta actividad física haces a la semana?",
+    options: [
+      { emoji: "🛋️", text: "Casi nada", n: 0, t: 3 },
+      { emoji: "🚶", text: "1 o 2 días", n: 0, t: 2 },
+      { emoji: "🏋️", text: "3 días o más", n: 0, t: 1 },
+      { emoji: "🏆", text: "Entreno todos los días", n: 1, t: 1 },
+    ],
+  },
+  {
+    question: "¿Dónde prefieres entrenar?",
+    options: [
+      { emoji: "🏠", text: "En casa", n: 0, t: 1 },
+      { emoji: "🏢", text: "En el gimnasio", n: 0, t: 1 },
+      { emoji: "🌳", text: "Al aire libre", n: 0, t: 1 },
+      { emoji: "🤷", text: "Por ahora solo quiero mejorar mi alimentación", n: 2, t: -3 },
+    ],
+  },
+  {
+    question: "¿Qué es lo que más te ha costado?",
+    options: [
+      { emoji: "📅", text: "Ser constante", n: 1, t: 1 },
+      { emoji: "🍽️", text: "Saber qué y cuánto comer", n: 3, t: 0 },
+      { emoji: "🤸", text: "Saber cómo entrenar bien", n: 0, t: 3 },
+      { emoji: "⏰", text: "Encontrar tiempo", n: 1, t: 1 },
+    ],
+  },
+  {
+    question: "¿Cómo te gustaría el acompañamiento?",
+    options: [
+      { emoji: "📱", text: "Online, a mi ritmo" },
+      { emoji: "🤝", text: "Presencial" },
+      { emoji: "🔀", text: "Una mezcla de ambos" },
+      { emoji: "💬", text: "Aún no sé, quiero conversarlo" },
+    ],
+  },
+];
+
+const QUIZ_PROFILES = {
+  fat: {
+    emoji: "🔥",
+    title: "Quema Grasa Inteligente",
+    text: "Quieres bajar grasa sin pasar hambre ni perder energía. La clave está en un déficit calórico moderado, proteína suficiente y entrenamiento de fuerza para conservar músculo.",
+    tips: [
+      "Incluye una fuente de proteína en cada comida (huevo, pollo, pescado, legumbres).",
+      "Llena la mitad de tu plato con verduras: más saciedad con menos calorías.",
+      "Camina 8.000 pasos al día: suma más de lo que crees.",
+    ],
+  },
+  muscle: {
+    emoji: "💪",
+    title: "Constructor de Músculo",
+    text: "Tu meta es ganar fuerza y masa muscular. Necesitas un entrenamiento con progresión, comer lo suficiente (sí, a veces más de lo que crees) y descansar bien.",
+    tips: [
+      "Apunta a 1,6–2 g de proteína por kilo de peso al día.",
+      "Entrena cada grupo muscular al menos 2 veces por semana.",
+      "Duerme 7–9 horas: el músculo crece cuando descansas.",
+    ],
+  },
+  health: {
+    emoji: "🌱",
+    title: "Bienestar y Energía",
+    text: "Buscas sentirte mejor en tu día a día: más energía, mejor digestión y salud a largo plazo. Pequeños cambios sostenidos harán una gran diferencia.",
+    tips: [
+      "Toma agua apenas despiertes y lleva una botella contigo.",
+      "Prioriza alimentos reales: frutas, verduras, legumbres y proteínas.",
+      "Muévete al menos 30 minutos al día, aunque sea caminando.",
+    ],
+  },
+  sport: {
+    emoji: "🏃",
+    title: "Atleta en Evolución",
+    text: "Quieres rendir más en tu deporte. Tu alimentación y tu preparación física deben ir de la mano con tus entrenamientos y competencias.",
+    tips: [
+      "Come carbohidratos de calidad antes de entrenar para tener energía.",
+      "Recupera con proteína + carbohidratos después de entrenar.",
+      "Trabaja fuerza 2 veces por semana para prevenir lesiones.",
+    ],
+  },
+  habits: {
+    emoji: "🧠",
+    title: "Reconexión con la Comida",
+    text: "Más que una dieta, necesitas hacer las paces con la comida: comer sin culpa, entender tu hambre y construir hábitos que puedas mantener toda la vida.",
+    tips: [
+      "Come sin pantallas al menos una comida al día.",
+      "No elimines alimentos que te gustan: aprende a incluirlos.",
+      "Antes de comer, pregúntate del 1 al 10 cuánta hambre tienes.",
+    ],
+  },
+  tone: {
+    emoji: "✨",
+    title: "Tonificación Total",
+    text: "Quieres verte más firme y sentirte con más energía. La combinación ganadora es entrenamiento de fuerza, buena alimentación y constancia.",
+    tips: [
+      "Prioriza ejercicios de fuerza por sobre el cardio largo.",
+      "Asegura proteína en desayuno, almuerzo y cena.",
+      "Mide tu progreso con fotos y medidas, no solo con la balanza.",
+    ],
+  },
+};
+
+const QUIZ_PLANS = {
+  combo: "Nutrición + Entrenamiento",
+  nutrition: "Plan de nutrición",
+  training: "Entrenamiento personal",
+};
+
+const quiz = document.getElementById("quiz");
+
+if (quiz) {
+  const screens = quiz.querySelectorAll(".quiz__screen");
+  const qCount = document.getElementById("quizCount");
+  const qBar = document.getElementById("quizBar");
+  const qQuestion = document.getElementById("quizQuestion");
+  const qOptions = document.getElementById("quizOptions");
+  const backBtn = quiz.querySelector("[data-action='back']");
+  let current = 0;
+  let answers = [];
+
+  const showScreen = (name) =>
+    screens.forEach((s) => (s.hidden = s.dataset.screen !== name));
+
+  function renderQuestion() {
+    const q = QUIZ_QUESTIONS[current];
+    qCount.textContent = `Pregunta ${current + 1} de ${QUIZ_QUESTIONS.length}`;
+    qBar.style.width = `${(current / QUIZ_QUESTIONS.length) * 100}%`;
+    qQuestion.textContent = q.question;
+    backBtn.disabled = current === 0;
+    qOptions.innerHTML = "";
+    q.options.forEach((opt, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "quiz__option";
+      if (answers[current] === i) btn.classList.add("is-selected");
+      btn.innerHTML = `<span class="quiz__option-emoji" aria-hidden="true"></span><span></span>`;
+      btn.children[0].textContent = opt.emoji;
+      btn.children[1].textContent = opt.text;
+      btn.addEventListener("click", () => choose(i, btn));
+      qOptions.appendChild(btn);
+    });
+    // reinicia la animación de entrada
+    const screen = quiz.querySelector("[data-screen='question']");
+    screen.style.animation = "none";
+    void screen.offsetWidth;
+    screen.style.animation = "";
+    qQuestion.focus({ preventScroll: true });
+  }
+
+  function choose(i, btn) {
+    answers[current] = i;
+    qOptions.querySelectorAll(".quiz__option").forEach((b) => b.classList.remove("is-selected"));
+    btn.classList.add("is-selected");
+    qOptions.style.pointerEvents = "none";
+    setTimeout(() => {
+      qOptions.style.pointerEvents = "";
+      if (current < QUIZ_QUESTIONS.length - 1) {
+        current++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }, 300);
+  }
+
+  function showResult() {
+    let n = 0;
+    let t = 0;
+    const chosen = answers.map((a, qi) => QUIZ_QUESTIONS[qi].options[a]);
+    chosen.forEach((o) => {
+      n += o.n || 0;
+      t += o.t || 0;
+    });
+
+    let plan = "combo";
+    if (n - t >= 4) plan = "nutrition";
+    else if (t - n >= 4) plan = "training";
+
+    const profile = QUIZ_PROFILES[chosen[0].profile];
+    document.getElementById("resultEmoji").textContent = profile.emoji;
+    document.getElementById("resultTitle").textContent = profile.title;
+    document.getElementById("resultText").textContent = profile.text;
+    document.getElementById("resultPlan").textContent = QUIZ_PLANS[plan];
+    const tips = document.getElementById("resultTips");
+    tips.innerHTML = "";
+    profile.tips.forEach((tip) => {
+      const li = document.createElement("li");
+      li.textContent = tip;
+      tips.appendChild(li);
+    });
+
+    const summary = QUIZ_QUESTIONS.map((q, qi) => `• ${q.question} ${chosen[qi].text}`).join("\n");
+    const msg =
+      `Hola! Hice el test de SabFit 🙌\n` +
+      `Mi perfil: ${profile.title}\n` +
+      `Plan recomendado: ${QUIZ_PLANS[plan]}\n\n` +
+      `Mis respuestas:\n${summary}\n\n` +
+      `Quiero más información.`;
+    document.getElementById("resultWa").href = whatsappUrl(msg);
+
+    qBar.style.width = "100%";
+    showScreen("result");
+    document.getElementById("resultTitle").focus({ preventScroll: true });
+    quiz.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  quiz.addEventListener("click", (e) => {
+    const action = e.target.closest("[data-action]")?.dataset.action;
+    if (action === "start" || action === "restart") {
+      current = 0;
+      answers = [];
+      showScreen("question");
+      renderQuestion();
+      if (action === "restart") quiz.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (action === "back" && current > 0) {
+      current--;
+      renderQuestion();
+    }
+  });
+}
+
 document.getElementById("year").textContent = new Date().getFullYear();

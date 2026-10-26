@@ -37,6 +37,7 @@
       <nav class="nav" id="nav">
         <a href="#inicio" class="nav__link">Inicio</a>
         <a href="#servicios" class="nav__link">Servicios</a>
+        <a href="#test" class="nav__link">Test</a>
         <a href="#sobre-mi" class="nav__link">Sobre mí</a>
         <a href="#contacto" class="nav__link">Contacto</a>
         <a href="#" class="btn btn--small btn--wa" data-wa="Hola! Quiero información sobre los servicios de SabFit">
@@ -64,6 +65,10 @@
             </a>
             <a href="#servicios" class="btn btn--ghost">Ver servicios</a>
           </div>
+          <a href="#test" class="hero__quiz-link">
+            <svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
+            ¿No sabes qué plan elegir? <strong>Haz el test gratis →</strong>
+          </a>
           <ul class="hero__stats">
             <li><strong>100%</strong><span>Personalizado</span></li>
             <li><strong>Online</strong><span>y presencial</span></li>
@@ -166,16 +171,62 @@
       </div>
     </section>
 
+    <!-- ===== Test ===== -->
+    <section class="section quiz-section" id="test">
+      <div class="container">
+        <header class="section__header reveal">
+          <span class="tag">Test gratuito · 1 minuto</span>
+          <h2 class="section__title">¿Qué plan es para ti?</h2>
+          <p class="section__text">Responde 6 preguntas rápidas y descubre tu perfil, el plan que más te conviene y consejos para empezar hoy.</p>
+        </header>
+
+        <div class="quiz reveal" id="quiz">
+          <!-- Pantalla de inicio -->
+          <div class="quiz__screen" data-screen="start">
+            <div class="quiz__intro-icon"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></div>
+            <h3>Descubre tu perfil SabFit</h3>
+            <p>No hay respuestas buenas ni malas: responde con lo que vives hoy.</p>
+            <button type="button" class="btn btn--primary btn--large" data-action="start">Comenzar test</button>
+          </div>
+
+          <!-- Preguntas (se llenan desde js/main.js) -->
+          <div class="quiz__screen" data-screen="question" hidden>
+            <div class="quiz__top">
+              <button type="button" class="quiz__back" data-action="back" aria-label="Pregunta anterior">← Atrás</button>
+              <span class="quiz__count" id="quizCount"></span>
+            </div>
+            <div class="quiz__progress"><span id="quizBar"></span></div>
+            <h3 class="quiz__question" id="quizQuestion" tabindex="-1"></h3>
+            <div class="quiz__options" id="quizOptions"></div>
+          </div>
+
+          <!-- Resultado -->
+          <div class="quiz__screen quiz__result" data-screen="result" hidden>
+            <span class="quiz__emoji" id="resultEmoji" aria-hidden="true"></span>
+            <p class="quiz__result-label">Tu perfil es</p>
+            <h3 class="quiz__result-title" id="resultTitle" tabindex="-1"></h3>
+            <p id="resultText"></p>
+            <div class="quiz__plan">
+              <span>Plan recomendado</span>
+              <strong id="resultPlan"></strong>
+            </div>
+            <h4>Consejos para empezar hoy</h4>
+            <ul class="quiz__tips" id="resultTips"></ul>
+            <a href="#" class="btn btn--wa btn--block btn--large" id="resultWa" target="_blank" rel="noopener">
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Enviar mi resultado por WhatsApp
+            </a>
+            <button type="button" class="quiz__restart" data-action="restart">Repetir el test</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Sobre mí ===== -->
     <section class="section section--alt" id="sobre-mi">
       <div class="container about">
         <div class="about__photo reveal">
-          <!-- Reemplaza este bloque por tu foto:
-               <img src="img/foto.jpg" alt="Foto de ..." loading="lazy"> -->
-          <div class="about__placeholder" aria-hidden="true">
-            <svg class="icon"><use href="#i-user"/></svg>
-            <span>Tu foto aquí</span>
-          </div>
+          <img src="https://sabfit.online/wp-content/uploads/2026/10/c7890c43-269e-4a64-a608-14b0e40931cf.jpeg" alt="Coach de SabFit" loading="lazy">
         </div>
 
         <div class="about__content reveal">
@@ -265,6 +316,7 @@
     <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-4 3 3 6-7"/></symbol>
     <symbol id="i-star" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
     <symbol id="i-user" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM3.5 21c.8-4 4.2-6.5 8.5-6.500s7.7 2.5 8.5 6.5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.500L19 7.5"/></symbol>
   </svg>
 
