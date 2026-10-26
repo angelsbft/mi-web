@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SabFit · Nutrición y Entrenamiento Personal</title>
+  <meta name="description" content="SabFit: planes de nutrición personalizados y entrenamiento personal para que alcances tus objetivos de forma saludable y sostenible.">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="canonical" href="https://sabfit.online/">
+
+  <!-- Open Graph (vista previa al compartir en WhatsApp / redes) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SabFit · Nutrición y Entrenamiento Personal">
+  <meta property="og:description" content="Planes de nutrición y entrenamiento hechos a tu medida. Escríbeme por WhatsApp.">
+  <meta property="og:url" content="https://sabfit.online/">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== Encabezado / navegación ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#inicio" class="logo" aria-label="SabFit, ir al inicio">
+        <span class="logo__mark">S</span>
+        <span class="logo__text">Sab<strong>Fit</strong></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="#inicio" class="nav__link">Inicio</a>
+        <a href="#servicios" class="nav__link">Servicios</a>
+        <a href="#sobre-mi" class="nav__link">Sobre mí</a>
+        <a href="#contacto" class="nav__link">Contacto</a>
+        <a href="#" class="btn btn--small btn--wa" data-wa="Hola! Quiero información sobre los servicios de SabFit">
+          WhatsApp
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== Inicio ===== -->
+    <section class="hero" id="inicio">
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <span class="tag">Nutrición · Entrenamiento · Hábitos</span>
+          <h1 class="hero__title">Transforma tu cuerpo y tu energía con un plan <span class="highlight">hecho para ti</span></h1>
+          <p class="hero__text">
+            Te acompaño a alcanzar tus metas con alimentación real, entrenamientos efectivos y
+            seguimiento cercano. Sin dietas extremas, sin fórmulas genéricas.
+          </p>
+          <div class="hero__actions">
+            <a href="#" class="btn btn--wa" data-wa="Hola! Quiero agendar mi evaluación inicial con SabFit">
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Agenda tu evaluación
+            </a>
+            <a href="#servicios" class="btn btn--ghost">Ver servicios</a>
+          </div>
+          <ul class="hero__stats">
+            <li><strong>100%</strong><span>Personalizado</span></li>
+            <li><strong>Online</strong><span>y presencial</span></li>
+            <li><strong>24/7</strong><span>Contacto por WhatsApp</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="hero__circle"></div>
+          <div class="hero__card hero__card--1">
+            <svg class="icon"><use href="#i-apple"/></svg>
+            <div><strong>Plan nutricional</strong><span>Adaptado a tus gustos</span></div>
+          </div>
+          <div class="hero__card hero__card--2">
+            <svg class="icon"><use href="#i-dumbbell"/></svg>
+            <div><strong>Rutina semanal</strong><span>Casa o gimnasio</span></div>
+          </div>
+          <div class="hero__card hero__card--3">
+            <svg class="icon"><use href="#i-chart"/></svg>
+            <div><strong>Progreso</strong><span>Seguimiento constante</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Servicios ===== -->
+    <section class="section" id="servicios">
+      <div class="container">
+        <header class="section__header reveal">
+          <span class="tag">Servicios</span>
+          <h2 class="section__title">¿Cómo puedo ayudarte?</h2>
+          <p class="section__text">Elige el acompañamiento que mejor se adapta a tu objetivo y estilo de vida.</p>
+        </header>
+
+        <div class="cards">
+          <article class="card reveal">
+            <div class="card__icon"><svg class="icon"><use href="#i-apple"/></svg></div>
+            <h3 class="card__title">Plan de nutrición</h3>
+            <p class="card__text">Evaluación inicial y pauta alimentaria personalizada según tu objetivo, horarios y preferencias.</p>
+            <ul class="card__list">
+              <li>Evaluación de hábitos y medidas</li>
+              <li>Menú semanal + lista de compras</li>
+              <li>Ajustes según tu progreso</li>
+            </ul>
+            <a href="#" class="card__link" data-wa="Hola! Me interesa el Plan de nutrición">Consultar →</a>
+          </article>
+
+          <article class="card card--featured reveal">
+            <span class="card__badge">Más elegido</span>
+            <div class="card__icon"><svg class="icon"><use href="#i-star"/></svg></div>
+            <h3 class="card__title">Nutrición + Entrenamiento</h3>
+            <p class="card__text">El programa completo: alimentación y entrenamiento trabajando juntos para resultados reales.</p>
+            <ul class="card__list">
+              <li>Plan nutricional personalizado</li>
+              <li>Rutina de entrenamiento a medida</li>
+              <li>Seguimiento semanal por WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--wa btn--block" data-wa="Hola! Me interesa el programa Nutrición + Entrenamiento">Quiero empezar</a>
+          </article>
+
+          <article class="card reveal">
+            <div class="card__icon"><svg class="icon"><use href="#i-dumbbell"/></svg></div>
+            <h3 class="card__title">Entrenamiento personal</h3>
+            <p class="card__text">Sesiones y rutinas diseñadas para tu nivel, presenciales u online, en casa o en el gimnasio.</p>
+            <ul class="card__list">
+              <li>Evaluación física inicial</li>
+              <li>Rutinas con videos explicativos</li>
+              <li>Progresión planificada</li>
+            </ul>
+            <a href="#" class="card__link" data-wa="Hola! Me interesa el Entrenamiento personal">Consultar →</a>
+          </article>
+        </div>
+
+        <!-- Cómo funciona -->
+        <div class="steps">
+          <h3 class="steps__title reveal">¿Cómo funciona?</h3>
+          <ol class="steps__list">
+            <li class="step reveal">
+              <span class="step__num">1</span>
+              <h4>Escríbeme</h4>
+              <p>Me cuentas tu objetivo por WhatsApp y resolvemos tus dudas.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step__num">2</span>
+              <h4>Evaluación</h4>
+              <p>Analizamos tus hábitos, medidas, rutina y preferencias.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step__num">3</span>
+              <h4>Tu plan</h4>
+              <p>Recibes tu plan de alimentación y/o entrenamiento personalizado.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step__num">4</span>
+              <h4>Seguimiento</h4>
+              <p>Ajustamos el plan según tu avance hasta lograr tu meta.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Sobre mí ===== -->
+    <section class="section section--alt" id="sobre-mi">
+      <div class="container about">
+        <div class="about__photo reveal">
+          <!-- Reemplaza este bloque por tu foto:
+               <img src="img/foto.jpg" alt="Foto de ..." loading="lazy"> -->
+          <div class="about__placeholder" aria-hidden="true">
+            <svg class="icon"><use href="#i-user"/></svg>
+            <span>Tu foto aquí</span>
+          </div>
+        </div>
+
+        <div class="about__content reveal">
+          <span class="tag">Sobre mí</span>
+          <h2 class="section__title">Hola, soy tu coach en SabFit</h2>
+          <p>
+            Soy profesional de la nutrición y el entrenamiento, y mi misión es ayudarte a sentirte
+            mejor con tu cuerpo a través de cambios sostenibles. Creo en la alimentación real,
+            en el movimiento como hábito y en que cada persona necesita un plan distinto.
+          </p>
+          <p>
+            Trabajo contigo de forma cercana: escucho tus objetivos, entiendo tu rutina y
+            diseño un plan que puedas mantener en el tiempo.
+          </p>
+          <ul class="about__list">
+            <li><svg class="icon"><use href="#i-check"/></svg> Formación en nutrición y ciencias del deporte</li>
+            <li><svg class="icon"><use href="#i-check"/></svg> Planes para bajar de peso, ganar masa muscular y mejorar tu salud</li>
+            <li><svg class="icon"><use href="#i-check"/></svg> Atención online y presencial</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contacto ===== -->
+    <section class="section contact" id="contacto">
+      <div class="container contact__inner">
+        <div class="contact__info reveal">
+          <span class="tag tag--light">Contacto</span>
+          <h2 class="section__title">¿Listo para empezar?</h2>
+          <p>Escríbeme por WhatsApp y te respondo a la brevedad. La primera conversación es sin compromiso.</p>
+          <a href="#" class="btn btn--wa btn--large" data-wa="Hola! Quiero información sobre los servicios de SabFit">
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+
+        <form class="contact__form reveal" id="contactForm" novalidate>
+          <h3>O déjame tus datos</h3>
+          <p class="contact__form-note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="Tu nombre" autocomplete="name" required>
+
+          <label for="goal">¿Qué te interesa?</label>
+          <select id="goal" name="goal">
+            <option>Plan de nutrición</option>
+            <option selected>Nutrición + Entrenamiento</option>
+            <option>Entrenamiento personal</option>
+            <option>Tengo otra consulta</option>
+          </select>
+
+          <label for="message">Cuéntame tu objetivo</label>
+          <textarea id="message" name="message" rows="4" placeholder="Ej: quiero bajar 5 kg y tener más energía"></textarea>
+
+          <p class="form-error" id="formError" role="alert"></p>
+          <button type="submit" class="btn btn--wa btn--block">
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Enviar por WhatsApp
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Pie de página ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#inicio" class="logo logo--light">
+        <span class="logo__mark">S</span>
+        <span class="logo__text">Sab<strong>Fit</strong></span>
+      </a>
+      <p>© <span id="year"></span> SabFit · Nutrición y Entrenamiento Personal</p>
+      <a href="https://sabfit.online" class="footer__link">sabfit.online</a>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="#" class="wa-float" data-wa="Hola! Quiero información sobre los servicios de SabFit" aria-label="Escribir por WhatsApp">
+    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+
+  <!-- Íconos SVG -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.48.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.57.94.95-3.48-.22-.36a9.4 9.4 0 0 1-1.44-5.02c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.2-4.24 9.43-9.45 9.43m8.04-17.47A11.3 11.3 0 0 0 12.05.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.3 11.3 0 0 0 5.37 1.37h.01c6.26 0 11.36-5.1 11.37-11.37 0-3.03-1.18-5.89-3.33-8.04"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 7c-1.5-1.2-3.5-1.6-5.2-.8C4.4 7.3 3.5 10.4 4.5 13.6 5.6 17.2 8 21 10.2 21c.8 0 1.2-.4 1.8-.4s1 .4 1.8.4c2.2 0 4.6-3.8 5.7-7.4 1-3.2.1-6.3-2.3-7.4-1.7-.8-3.7-.4-5.2.8zM12 7c0-2 1-3.5 3-4"/></symbol>
+    <symbol id="i-dumbbell" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6.5 6.5v11M17.5 6.5v11M3.5 9v6M20.5 9v6M6.5 12h11"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 3v18h18M7 15l4-4 3 3 6-7"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zM3.5 21c.8-4 4.2-6.5 8.5-6.500s7.7 2.5 8.5 6.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.500L19 7.5"/></symbol>
+  </svg>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
