@@ -12,11 +12,26 @@ function whatsappUrl(message) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
 
+// Medición: avisa a Google Tag Manager cada vez que alguien abre WhatsApp.
+// En GTM se usa el evento personalizado "whatsapp_click" (variable de capa de datos: "origen").
+function trackWhatsApp(origen) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: "whatsapp_click", origen });
+}
+
+function whatsappOrigin(el) {
+  if (el.classList.contains("wa-float")) return "boton_flotante";
+  if (el.closest(".nav")) return "menu";
+  const section = el.closest("section[id]");
+  return section ? section.id : "otro";
+}
+
 // Enlaces de WhatsApp: cualquier elemento con data-wa="mensaje"
 document.querySelectorAll("[data-wa]").forEach((link) => {
   link.href = whatsappUrl(link.dataset.wa);
   link.target = "_blank";
   link.rel = "noopener";
+  link.addEventListener("click", () => trackWhatsApp(whatsappOrigin(link)));
 });
 
 // Menú móvil
@@ -97,6 +112,7 @@ form.addEventListener("submit", (e) => {
   let text = `Hola! Soy ${name}. Me interesa: ${goal}.`;
   if (message) text += `\nMi objetivo: ${message}`;
 
+  trackWhatsApp("formulario_contacto");
   window.open(whatsappUrl(text), "_blank", "noopener");
 });
 
@@ -321,7 +337,9 @@ if (quiz) {
       `Plan recomendado: ${QUIZ_PLANS[plan]}\n\n` +
       `Mis respuestas:\n${summary}\n\n` +
       `Quiero más información.`;
-    document.getElementById("resultWa").href = whatsappUrl(msg);
+    const resultWa = document.getElementById("resultWa");
+    resultWa.href = whatsappUrl(msg);
+    resultWa.onclick = () => trackWhatsApp(`test_${chosen[0].profile}`);
 
     qBar.style.width = "100%";
     showScreen("result");

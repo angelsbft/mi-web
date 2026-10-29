@@ -27,3 +27,9 @@ Abre `index.html` en el navegador, o ejecuta `python3 -m http.server` y visita h
 ## Test "¿Qué plan es para ti?"
 
 Las preguntas, los puntajes y los perfiles están al final de `js/main.js` (`QUIZ_QUESTIONS`, `QUIZ_PROFILES`). El resultado se envía por WhatsApp con las respuestas.
+
+## Medición (Google Tag Manager)
+
+Cada clic que abre WhatsApp envía a la capa de datos `{ event: "whatsapp_click", origen: "..." }`
+(`inicio`, `servicios`, `sobre-mi`, `contacto`, `menu`, `boton_flotante`, `formulario_contacto`, `test_<perfil>`).
+En GTM: activador de **Evento personalizado** `whatsapp_click` y variable de capa de datos `origen`.
