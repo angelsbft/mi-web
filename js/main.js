@@ -109,12 +109,51 @@ form.addEventListener("submit", (e) => {
   formError.textContent = "";
   form.elements.name.classList.remove("is-invalid");
 
-  let text = `Hola! Soy ${name}. Me interesa: ${goal}.`;
+  let text = `¡Hola Ángel! 👋 Soy *${name}*.\n\nMe interesa: *${goal}*`;
   if (message) text += `\nMi objetivo: ${message}`;
+  text += `\n\n¿Me cuentas cómo podemos empezar?`;
 
   trackWhatsApp("formulario_contacto");
   window.open(whatsappUrl(text), "_blank", "noopener");
 });
+
+// Agendar primera cita → WhatsApp
+const booking = document.getElementById("agendar");
+
+if (booking) {
+  // Los botones "Agendar…" de las tarjetas preseleccionan la modalidad
+  document.querySelectorAll("[data-book]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      booking.querySelector(`input[name="mode"][value="${btn.dataset.book}"]`).checked = true;
+    })
+  );
+
+  booking.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nameInput = booking.elements.bName;
+    const name = nameInput.value.trim();
+    const error = document.getElementById("bookingError");
+    if (!name) {
+      error.textContent = "Por favor escribe tu nombre.";
+      nameInput.classList.add("is-invalid");
+      nameInput.focus();
+      return;
+    }
+    error.textContent = "";
+    nameInput.classList.remove("is-invalid");
+
+    const mode = booking.elements.mode.value;
+    const what = mode === "presencial" ? "*evaluación presencial*" : "*primera reunión online* (videollamada)";
+    const text =
+      `¡Hola Ángel! 👋 Soy *${name}* y quiero agendar mi ${what} en SabFit.\n\n` +
+      `📅 Día preferido: ${booking.elements.bDay.value}\n` +
+      `🕐 Horario: ${booking.elements.bTime.value}\n\n` +
+      `¿Qué disponibilidad tienes?`;
+
+    trackWhatsApp(`agenda_${mode}`);
+    window.open(whatsappUrl(text), "_blank", "noopener");
+  });
+}
 
 // Test "¿Qué plan es para ti?"
 // Cada opción suma puntos a nutrición (n) y/o entrenamiento (t).
@@ -332,11 +371,11 @@ if (quiz) {
 
     const summary = QUIZ_QUESTIONS.map((q, qi) => `• ${q.question} ${chosen[qi].text}`).join("\n");
     const msg =
-      `Hola! Hice el test de SabFit 🙌\n` +
-      `Mi perfil: ${profile.title}\n` +
-      `Plan recomendado: ${QUIZ_PLANS[plan]}\n\n` +
-      `Mis respuestas:\n${summary}\n\n` +
-      `Quiero más información.`;
+      `¡Hola Ángel! 👋 Acabo de hacer el test de SabFit.\n\n` +
+      `🏷️ Mi perfil: *${profile.title}*\n` +
+      `✅ Plan recomendado: *${QUIZ_PLANS[plan]}*\n\n` +
+      `📝 Mis respuestas:\n${summary}\n\n` +
+      `¿Me cuentas cómo podemos empezar?`;
     const resultWa = document.getElementById("resultWa");
     resultWa.href = whatsappUrl(msg);
     resultWa.onclick = () => trackWhatsApp(`test_${chosen[0].profile}`);
