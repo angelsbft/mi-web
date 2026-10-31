@@ -480,6 +480,7 @@ p { margin: 0 0 1em; }
   font-style: italic;
   font-size: 1.05rem;
 }
+.btn--ig { margin-left: .6rem; }
 .about__quote cite { display: block; margin-top: .5rem; font-style: normal; font-weight: 600; font-size: .9rem; color: var(--primary); }
 .about__list { list-style: none; padding: 0; margin: 1.5rem 0 0; }
 .about__list li { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .9rem; font-weight: 500; }
@@ -783,6 +784,15 @@ p { margin: 0 0 1em; }
   align-items: center;
 }
 .contact__info p { font-size: 1.15rem; opacity: .9; margin-bottom: 2rem; }
+.contact__ig {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  width: fit-content;
+  margin-top: 1.5rem;
+  opacity: .9;
+}
+.contact__ig:hover { opacity: 1; text-decoration: underline; }
 .contact__form {
   background: #fff;
   color: var(--text);
@@ -829,6 +839,8 @@ p { margin: 0 0 1em; }
   gap: 1rem;
 }
 .footer p { margin: 0; }
+.footer__links { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+.footer__ig { display: inline-flex; align-items: center; gap: .4rem; }
 .footer__link:hover { color: #fff; }
 
 /* ---------- WhatsApp flotante ---------- */
@@ -881,6 +893,7 @@ p { margin: 0 0 1em; }
   .card--featured { order: -1; }
   .steps__list { grid-template-columns: repeat(2, 1fr); }
   .contact__info { text-align: center; }
+  .contact__ig { margin-left: auto; margin-right: auto; }
 }
 
 @media (min-width: 761px) and (max-width: 1024px) {
@@ -935,6 +948,8 @@ p { margin: 0 0 1em; }
   .hero__stats strong { font-size: 1.3rem; }
   .hero__stats span { font-size: .78rem; }
   .footer__inner { flex-direction: column; text-align: center; }
+  .footer__links { justify-content: center; }
+  .btn--ig { margin: .8rem 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

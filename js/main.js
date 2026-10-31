@@ -90,6 +90,14 @@ if ("IntersectionObserver" in window) {
   document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
 }
 
+// Clics a Instagram (evento "instagram_click" en Tag Manager)
+document.querySelectorAll("[data-ig]").forEach((link) =>
+  link.addEventListener("click", () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "instagram_click", origen: whatsappOrigin(link) });
+  })
+);
+
 // Formulario de contacto → abre WhatsApp con el mensaje armado
 const form = document.getElementById("contactForm");
 const formError = document.getElementById("formError");
@@ -281,8 +289,8 @@ const QUIZ_PROFILES = {
 };
 
 const QUIZ_PLANS = {
-  combo: "Nutrición + Entrenamiento",
-  nutrition: "Plan de nutrición",
+  combo: "Entrenamiento + Orientación nutricional",
+  nutrition: "Orientación nutricional",
   training: "Entrenamiento personal",
 };
 
