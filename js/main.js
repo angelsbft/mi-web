@@ -409,4 +409,51 @@ if (quiz) {
   });
 }
 
+// Animaciones de la portada (si no te gustan, borra este bloque y la cinta en index.html)
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// 1) La foto se mueve suavemente siguiendo el mouse (solo en computador)
+const heroPhoto = document.getElementById("heroPhoto");
+if (heroPhoto && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+  const hero = heroPhoto.closest(".hero");
+  let frame = 0;
+  hero.addEventListener("pointermove", (e) => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      const r = hero.getBoundingClientRect();
+      heroPhoto.style.setProperty("--mx", ((e.clientX - r.left) / r.width - 0.5).toFixed(3));
+      heroPhoto.style.setProperty("--my", ((e.clientY - r.top) / r.height - 0.5).toFixed(3));
+      frame = 0;
+    });
+  });
+  hero.addEventListener("pointerleave", () => {
+    heroPhoto.style.setProperty("--mx", 0);
+    heroPhoto.style.setProperty("--my", 0);
+  });
+}
+
+// 2) La cinta de palabras acelera al hacer scroll y cambia de sentido al subir
+const ribbon = document.getElementById("ribbon");
+const ribbonAnim = ribbon && !reduceMotion && ribbon.getAnimations ? ribbon.getAnimations()[0] : null;
+if (ribbonAnim) {
+  let lastY = window.scrollY;
+  let boost = 0;
+  let ticking = false;
+  const settle = () => {
+    boost *= 0.9;
+    ribbonAnim.playbackRate = Math.abs(boost) < 0.05 ? Math.sign(ribbonAnim.playbackRate) || 1 : boost;
+    if (Math.abs(boost) >= 0.05) requestAnimationFrame(settle);
+    else ticking = false;
+  };
+  window.addEventListener("scroll", () => {
+    const dy = window.scrollY - lastY;
+    lastY = window.scrollY;
+    boost = Math.max(-6, Math.min(6, (Math.sign(dy) || 1) * (1 + Math.abs(dy) / 12)));
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(settle);
+    }
+  }, { passive: true });
+}
+
 document.getElementById("year").textContent = new Date().getFullYear();

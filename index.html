@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SabFit · Ángel Sabata · Entrenamiento Personal y Orientación Nutricional</title>
   <meta name="description" content="SabFit: entrenamiento personal y orientación nutricional con Ángel Sabata para que alcances tus objetivos de forma saludable y sostenible.">
-  <meta name="theme-color" content="#0f766e">
+  <meta name="theme-color" content="#0f2a1d">
   <link rel="canonical" href="https://sabfit.online/">
 
   <!-- Open Graph (vista previa al compartir en WhatsApp / redes) -->
@@ -17,7 +17,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -26,8 +26,8 @@
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="#inicio" class="logo" aria-label="SabFit, ir al inicio">
-        <span class="logo__mark">S</span>
-        <span class="logo__text">Sab<strong>Fit</strong></span>
+        <svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+        <span class="logo__text">SabFit</span>
       </a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
@@ -51,56 +51,54 @@
   <main>
     <!-- ===== Inicio ===== -->
     <section class="hero" id="inicio">
-      <div class="container hero__inner">
+      <div class="hero__photo" id="heroPhoto">
+        <img src="https://sabfit.online/wp-content/uploads/2026/10/c7890c43-269e-4a64-a608-14b0e40931cf-2.jpeg" alt="Ángel Sabata, entrenador personal de SabFit" data-no-lazy="1">
+        <div class="hero__badge">
+          <svg class="icon" aria-hidden="true"><use href="#i-logo"/></svg>
+          <div><strong>Ángel Sabata</strong><span>Experto en hipertrofia · ECEP</span></div>
+        </div>
+      </div>
+      <div class="container">
         <div class="hero__content">
-          <span class="tag">Entrenamiento · Nutrición · Hábitos</span>
-          <h1 class="hero__title">Transforma tu cuerpo y tu energía con un plan <span class="highlight">hecho para ti</span></h1>
+          <span class="hero__tag"><i></i>Entrenador personal · Bogotá</span>
+          <h1 class="hero__title">
+            <span class="hero__line">Entrena con <em class="em">propósito.</em></span>
+            <span class="hero__line">Come con <em class="em">sentido.</em></span>
+          </h1>
           <p class="hero__text">
-            Te acompaño a alcanzar tus metas con alimentación real, entrenamientos efectivos y
-            seguimiento cercano. Sin dietas extremas, sin fórmulas genéricas.
+            Hipertrofia, hábitos y orientación nutricional basados en ciencia, con seguimiento
+            cercano por WhatsApp. Sin dietas extremas, sin fórmulas genéricas.
           </p>
           <div class="hero__actions">
             <a href="#" class="btn btn--wa" data-wa="¡Hola Ángel! 👋 Quiero agendar mi *evaluación inicial* en SabFit.&#10;&#10;Mi nombre es: &#10;Prefiero que sea (presencial u online): &#10;Mi objetivo es: ">
               <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
               Agenda tu evaluación
             </a>
-            <a href="#servicios" class="btn btn--ghost">Ver servicios</a>
+            <a href="#test" class="btn btn--light">Haz el test gratis →</a>
           </div>
-          <a href="#test" class="hero__quiz-link">
-            <svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg>
-            ¿No sabes qué plan elegir? <strong>Haz el test gratis →</strong>
-          </a>
           <ul class="hero__stats">
+            <li><strong>ECEP</strong><span>Entrenador certificado</span></li>
             <li><strong>100%</strong><span>Personalizado</span></li>
-            <li><strong>Online</strong><span>y presencial</span></li>
-            <li><strong>24/7</strong><span>Contacto por WhatsApp</span></li>
+            <li><strong>1:1</strong><span>Seguimiento por WhatsApp</span></li>
           </ul>
-        </div>
-
-        <div class="hero__visual" aria-hidden="true">
-          <div class="hero__circle"></div>
-          <div class="hero__card hero__card--1">
-            <svg class="icon"><use href="#i-apple"/></svg>
-            <div><strong>Hábitos de alimentación</strong><span>Adaptados a tus gustos</span></div>
-          </div>
-          <div class="hero__card hero__card--2">
-            <svg class="icon"><use href="#i-dumbbell"/></svg>
-            <div><strong>Rutina semanal</strong><span>Casa o gimnasio</span></div>
-          </div>
-          <div class="hero__card hero__card--3">
-            <svg class="icon"><use href="#i-chart"/></svg>
-            <div><strong>Progreso</strong><span>Seguimiento constante</span></div>
-          </div>
         </div>
       </div>
     </section>
+
+    <!-- Cinta de palabras: se mueve sola y reacciona al scroll -->
+    <div class="ribbon" aria-hidden="true">
+      <div class="ribbon__track" id="ribbon">
+        <span>Hipertrofia</span><span>Hábitos</span><span>Nutrición</span><span>Constancia</span><span>Fuerza</span><span>Resultados</span>
+        <span>Hipertrofia</span><span>Hábitos</span><span>Nutrición</span><span>Constancia</span><span>Fuerza</span><span>Resultados</span>
+      </div>
+    </div>
 
     <!-- ===== Servicios ===== -->
     <section class="section" id="servicios">
       <div class="container">
         <header class="section__header reveal">
           <span class="tag">Servicios</span>
-          <h2 class="section__title">¿Cómo puedo ayudarte?</h2>
+          <h2 class="section__title">¿Cómo puedo <em class="em">ayudarte?</em></h2>
           <p class="section__text">Elige el acompañamiento que mejor se adapta a tu objetivo y estilo de vida.</p>
         </header>
 
@@ -151,7 +149,7 @@
       <div class="container">
         <header class="section__header reveal">
           <span class="tag">Tu primera cita</span>
-          <h2 class="section__title">¿Cómo empezamos?</h2>
+          <h2 class="section__title">¿Cómo <em class="em">empezamos?</em></h2>
           <p class="section__text">Todo comienza conociéndote de verdad. Elige cómo quieres dar el primer paso.</p>
         </header>
 
@@ -273,7 +271,7 @@
       <div class="container">
         <header class="section__header reveal">
           <span class="tag">Test gratuito · 1 minuto</span>
-          <h2 class="section__title">¿Qué plan es para ti?</h2>
+          <h2 class="section__title">¿Qué plan es <em class="em">para ti?</em></h2>
           <p class="section__text">Responde 6 preguntas rápidas y descubre tu perfil, el plan que más te conviene y consejos para empezar hoy.</p>
         </header>
 
@@ -338,7 +336,7 @@
 
         <div class="about__content reveal">
           <span class="tag">Sobre mí</span>
-          <h2 class="section__title">Hola, soy Ángel Sabata</h2>
+          <h2 class="section__title">Hola, soy <em class="em">Ángel</em> Sabata</h2>
           <p class="about__role">Entrenador personal · Estudiante de Nutrición y Dietética</p>
           <p>
             Tengo 20 años y el entrenamiento es mi pasión y mi profesión. Me formé como
@@ -408,7 +406,7 @@
       <div class="container">
         <header class="section__header reveal">
           <span class="tag">Preguntas frecuentes</span>
-          <h2 class="section__title">Resolvamos tus dudas</h2>
+          <h2 class="section__title">Resolvamos tus <em class="em">dudas</em></h2>
         </header>
         <div class="faq reveal">
           <details class="faq__item">
@@ -453,7 +451,7 @@
       <div class="container contact__inner">
         <div class="contact__info reveal">
           <span class="tag tag--light">Contacto</span>
-          <h2 class="section__title">¿Listo para empezar?</h2>
+          <h2 class="section__title">¿Listo para <em class="em">empezar?</em></h2>
           <p>Escríbeme por WhatsApp y te respondo a la brevedad. La primera conversación es sin compromiso.</p>
           <a href="#" class="btn btn--wa btn--large" data-wa="¡Hola Ángel! 👋 Vengo de la página de SabFit y quiero más información sobre tus planes.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
             <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
@@ -497,8 +495,8 @@
   <footer class="footer">
     <div class="container footer__inner">
       <a href="#inicio" class="logo logo--light">
-        <span class="logo__mark">S</span>
-        <span class="logo__text">Sab<strong>Fit</strong></span>
+        <svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+        <span class="logo__text">SabFit</span>
       </a>
       <p>© <span id="year"></span> SabFit · Entrenamiento Personal y Orientación Nutricional</p>
       <div class="footer__links">
@@ -530,6 +528,7 @@
     <symbol id="i-ruler" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 15.5L15.5 3 21 8.5 8.5 21zM7 12l2 2M10 9l2 2M13 6l2 2"/></symbol>
     <symbol id="i-video" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM16 10l5-3v10l-5-3"/></symbol>
     <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 2.5h10A4.5 4.5 0 0 1 21.5 7v10a4.5 4.5 0 0 1-4.5 4.5H7A4.5 4.5 0 0 1 2.5 17V7A4.5 4.5 0 0 1 7 2.5zM16 11.4A4 4 0 1 1 12.6 8a4 4 0 0 1 3.4 3.4zM17.5 6.5h0"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 100 100"><g fill="currentColor"><rect x="8" y="30" width="14" height="40" rx="4"/><rect x="22" y="37" width="8" height="26" rx="3"/><rect x="30" y="46" width="34" height="8" rx="4"/></g><g class="logo-leaf"><path class="logo-leaf__a" d="M62 50 C62 30 78 18 93 15 C95 34 87 58 62 50 Z"/><path class="logo-leaf__b" d="M62 50 C64 66 78 79 93 81 C93 66 83 52 62 50 Z"/><path d="M68 47 C74 40 80 32 87 23" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".45"/></g></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.500L19 7.5"/></symbol>
   </svg>
 
