@@ -1,0 +1,49 @@
+<!-- Selector de estilos: solo existe en la vista previa -->
+<style>
+  .sf-switch {
+    position: fixed; left: 16px; bottom: 16px; z-index: 200;
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 12px; border-radius: 16px;
+    background: rgba(17, 17, 20, .92); color: #fff;
+    font: 600 13px/1.2 Inter, system-ui, sans-serif;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .35);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    max-width: calc(100vw - 110px);
+  }
+  .sf-switch__title { opacity: .7; font-weight: 500; }
+  .sf-switch__row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sf-switch button {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 10px; border-radius: 999px;
+    border: 1.5px solid rgba(255, 255, 255, .2); background: transparent; color: #fff;
+    font: inherit; cursor: pointer;
+  }
+  .sf-switch button[aria-pressed="true"] { background: #fff; color: #111; border-color: #fff; }
+  .sf-switch i { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
+</style>
+<div class="sf-switch" role="group" aria-label="Elegir estilo">
+  <span class="sf-switch__title">Estilo de la página</span>
+  <div class="sf-switch__row">
+    <button type="button" data-set-theme=""><i style="background:linear-gradient(135deg,#0f766e,#f97316)"></i>0 Actual</button>
+    <button type="button" data-set-theme="power"><i style="background:linear-gradient(135deg,#0a0a0b 50%,#c6ff3d 50%)"></i>1 Power</button>
+    <button type="button" data-set-theme="fuego"><i style="background:linear-gradient(135deg,#ff4d00,#ff2e63)"></i>2 Fuego</button>
+    <button type="button" data-set-theme="elite"><i style="background:linear-gradient(135deg,#1e3a8a 50%,#f5b301 50%)"></i>3 Élite</button>
+    <button type="button" data-set-theme="natural"><i style="background:linear-gradient(135deg,#2f6b3f 50%,#c08a3e 50%)"></i>4 Natural</button>
+  </div>
+</div>
+<script>
+  (function () {
+    var buttons = document.querySelectorAll("[data-set-theme]");
+    function apply(name) {
+      if (name) document.documentElement.setAttribute("data-theme", name);
+      else document.documentElement.removeAttribute("data-theme");
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.setTheme === name)); });
+      try { localStorage.setItem("sf-theme", name); } catch (e) {}
+    }
+    buttons.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.setTheme); }); });
+    var saved = "";
+    try { saved = localStorage.getItem("sf-theme") || ""; } catch (e) {}
+    var fromUrl = new URLSearchParams(location.search).get("estilo");
+    apply(fromUrl !== null ? fromUrl : saved);
+  })();
+</script>

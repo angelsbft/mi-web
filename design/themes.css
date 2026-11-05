@@ -1,0 +1,128 @@
+/* =========================================================
+   SabFit · Propuestas de estilo (solo para la vista previa)
+   Cada bloque redefine las variables de :root en css/styles.css.
+   El estilo elegido se copia a :root y este archivo deja de usarse.
+   ========================================================= */
+
+/* 1 · POWER — negro + verde lima eléctrico (gimnasio premium, hipertrofia) */
+[data-theme="power"] {
+  --primary: #c6ff3d;
+  --primary-dark: #a6e22e;
+  --primary-light: rgba(198, 255, 61, .14);
+  --accent: #2ce6b4;
+  --accent-light: rgba(44, 230, 180, .14);
+  --on-primary: #0a0a0b;
+  --on-accent: #0a0a0b;
+  --grad: linear-gradient(135deg, #c6ff3d, #2ce6b4);
+  --grad-text: linear-gradient(120deg, #c6ff3d, #2ce6b4);
+
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --bg: #0a0a0b;
+  --bg-alt: #111113;
+  --surface: #18181b;
+  --surface-2: #1f1f23;
+  --border: #2a2a2f;
+  --header-bg: rgba(10, 10, 11, .82);
+  --footer-bg: #000000;
+  --contact-bg: radial-gradient(circle at 15% 20%, rgba(198, 255, 61, .18), transparent 45%), #111113;
+  --shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, .6);
+
+  --font-head: "Archivo", var(--font-body);
+  --head-weight: 900;
+  --head-transform: uppercase;
+  --head-spacing: -.01em;
+  color-scheme: dark;
+}
+
+/* 2 · FUEGO — naranja intenso + rojo coral sobre crema (energía, motivación) */
+[data-theme="fuego"] {
+  --primary: #ff4d00;
+  --primary-dark: #cc3d00;
+  --primary-light: #ffe4d6;
+  --accent: #ff2e63;
+  --accent-light: #ffe0e8;
+  --on-primary: #ffffff;
+  --on-accent: #ffffff;
+  --grad: linear-gradient(135deg, #ff4d00, #ff2e63);
+  --grad-text: linear-gradient(120deg, #ff4d00, #ff2e63);
+
+  --text: #1a1410;
+  --muted: #6b5e55;
+  --bg: #fffbf5;
+  --bg-alt: #fff1e6;
+  --surface: #ffffff;
+  --surface-2: #fff8f2;
+  --border: #f1e3d6;
+  --header-bg: rgba(255, 251, 245, .85);
+  --footer-bg: #1a1410;
+  --contact-bg: linear-gradient(135deg, #1a1410, #3a1d10 60%, #ff4d00 160%);
+
+  --font-head: "Montserrat", var(--font-body);
+  --head-weight: 800;
+  --head-transform: none;
+  --head-spacing: -.02em;
+}
+
+/* 3 · ÉLITE — azul marino + dorado (premium, confianza, salud) */
+[data-theme="elite"] {
+  --primary: #1d4ed8;
+  --primary-dark: #1e3a8a;
+  --primary-light: #dbeafe;
+  --accent: #f5b301;
+  --accent-light: #fef3c7;
+  --on-primary: #ffffff;
+  --on-accent: #111827;
+  --grad: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  --grad-text: linear-gradient(120deg, #1d4ed8, #f5b301);
+
+  --text: #0f172a;
+  --muted: #64748b;
+  --bg: #ffffff;
+  --bg-alt: #f3f6fb;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e2e8f0;
+  --header-bg: rgba(255, 255, 255, .88);
+  --footer-bg: #0b1530;
+  --contact-bg: linear-gradient(135deg, #0b1530, #1e3a8a);
+
+  --font-head: "Sora", var(--font-body);
+  --head-weight: 700;
+  --head-transform: none;
+  --head-spacing: -.02em;
+}
+
+/* 4 · NATURAL — verde bosque + bronce sobre arena (bienestar, hábitos) */
+[data-theme="natural"] {
+  --primary: #2f6b3f;
+  --primary-dark: #1e4a2a;
+  --primary-light: #dcebdc;
+  --accent: #c08a3e;
+  --accent-light: #f5e8d3;
+  --on-primary: #ffffff;
+  --on-accent: #ffffff;
+  --grad: linear-gradient(135deg, #1e4a2a, #4f8a57);
+  --grad-text: linear-gradient(120deg, #2f6b3f, #c08a3e);
+
+  --text: #1e2420;
+  --muted: #66706a;
+  --bg: #faf7f2;
+  --bg-alt: #f1ebe1;
+  --surface: #ffffff;
+  --surface-2: #fbf9f5;
+  --border: #e6dfd3;
+  --header-bg: rgba(250, 247, 242, .88);
+  --footer-bg: #16201a;
+  --contact-bg: linear-gradient(135deg, #16201a, #2f6b3f);
+
+  --font-head: "Fraunces", Georgia, serif;
+  --head-weight: 700;
+  --head-transform: none;
+  --head-spacing: -.01em;
+}
+
+/* Ajustes puntuales de POWER: el botón verde de WhatsApp no se lee sobre el lima */
+[data-theme="power"] .card--featured .btn--wa { background: #0a0a0b; color: #c6ff3d; box-shadow: none; }
+[data-theme="power"] .card--featured .btn--wa:hover { background: #18181b; }
