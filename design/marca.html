@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SabFit · Propuesta de marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Cada paleta = 2 colores tranquilos (bg, mid) + 1 color fuerte (loud) */
+:root, [data-pal="blaze"] {
+  --bg: #0b0c0c; --ink: #f2eee8; --mid: #f2eee8; --mid-ink: #0b0c0c;
+  --loud: #ff5b1f; --on-loud: #0b0c0c; --soft: rgba(242, 238, 232, .62);
+}
+[data-pal="volt"] {
+  --bg: #0e0e10; --ink: #f4f3ff; --mid: #6e3bff; --mid-ink: #ffffff;
+  --loud: #7cf2c4; --on-loud: #0e0e10; --soft: rgba(244, 243, 255, .62);
+}
+[data-pal="pulse"] {
+  --bg: #0a0f1c; --ink: #eef3ff; --mid: #2f7bff; --mid-ink: #ffffff;
+  --loud: #ff8a5b; --on-loud: #0a0f1c; --soft: rgba(238, 243, 255, .62);
+}
+[data-pal="sky"] {
+  --bg: #2c9bff; --ink: #ffffff; --mid: #f5f6f2; --mid-ink: #0b1b2b;
+  --loud: #e8432e; --on-loud: #ffffff; --soft: rgba(255, 255, 255, .78);
+  --em: #0b1b2b;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body { margin: 0; font: 400 16px/1.6 Inter, system-ui, sans-serif; color: #111; background: #f4f2ee; }
+img { max-width: 100%; display: block; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+.display { font-family: Anton, Impact, sans-serif; text-transform: uppercase; letter-spacing: .01em; line-height: .95; font-weight: 400; }
+.serif { font-family: "Instrument Serif", Georgia, serif; font-style: italic; text-transform: none; letter-spacing: 0; font-weight: 400; }
+
+/* Barra superior: índice + selector de paleta */
+.topbar { position: sticky; top: 0; z-index: 50; background: rgba(17, 17, 17, .94); color: #fff; backdrop-filter: blur(10px); }
+.topbar .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; padding-top: 12px; padding-bottom: 12px; }
+.topbar__brand { font-family: Anton, sans-serif; font-size: 20px; letter-spacing: .03em; }
+.topbar nav { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; opacity: .8; }
+.topbar nav a { color: inherit; text-decoration: none; }
+.topbar nav a:hover { opacity: 1; text-decoration: underline; }
+.pals { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+.pals button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border-radius: 999px; border: 1.5px solid rgba(255,255,255,.25); background: none; color: #fff; font: 600 12px Inter, sans-serif; cursor: pointer; }
+.pals button[aria-pressed="true"] { background: #fff; color: #111; border-color: #fff; }
+.pals i { display: inline-flex; width: 30px; height: 12px; border-radius: 3px; overflow: hidden; }
+.pals i b { flex: 1; }
+
+/* Intro */
+.intro { padding: 70px 0 40px; }
+.intro h1 { font-size: clamp(48px, 9vw, 112px); margin: 0 0 12px; color: #111; }
+.intro h1 .serif { color: #ff5b1f; }
+.intro p { max-width: 640px; font-size: 18px; color: #444; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 28px; }
+.steps a { display: block; padding: 16px; border-radius: 14px; background: #fff; text-decoration: none; color: #111; border: 1px solid #e6e2db; }
+.steps a b { display: block; font-family: Anton, sans-serif; font-size: 28px; font-weight: 400; color: #ff5b1f; }
+.steps a span { font-size: 14px; color: #555; }
+
+section.block { padding: 60px 0; border-top: 1px solid #e3dfd8; }
+.block__head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
+.block__num { font-family: Anton, sans-serif; font-size: 64px; line-height: 1; color: #d8d3cb; }
+.block__head h2 { font-family: Anton, sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(30px, 4.5vw, 46px); margin: 0; letter-spacing: .01em; }
+.block__head p { flex-basis: 100%; margin: 4px 0 0; color: #555; max-width: 720px; }
+
+/* 1 · Paletas */
+.palgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.pal { border-radius: 20px; overflow: hidden; background: #fff; border: 2px solid transparent; cursor: pointer; transition: transform .2s, border-color .2s; text-align: left; padding: 0; font: inherit; color: inherit; }
+.pal:hover { transform: translateY(-3px); }
+.pal[aria-pressed="true"] { border-color: #111; }
+.pal__sw { display: grid; grid-template-columns: 1.6fr 1.1fr .7fr; height: 170px; }
+.pal__sw div { padding: 12px; display: flex; flex-direction: column; justify-content: flex-end; font-size: 11px; font-weight: 600; }
+.pal__sw small { display: block; opacity: .75; font-weight: 500; }
+.pal__body { padding: 16px 18px 18px; }
+.pal__body h3 { margin: 0; font-family: Anton, sans-serif; font-weight: 400; font-size: 26px; text-transform: uppercase; letter-spacing: .02em; }
+.pal__body p { margin: 4px 0 0; color: #555; font-size: 14px; }
+.pal__ref { display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600; color: #777; }
+
+/* 2 · Tipografía */
+.type { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
+.type__card { background: var(--bg); color: var(--ink); border-radius: 20px; padding: 34px; }
+.type__card .display { font-size: clamp(54px, 8vw, 104px); }
+.type__card .display .serif { color: var(--em, var(--loud)); font-size: 1.05em; }
+.type__list { display: grid; gap: 12px; }
+.type__row { background: #fff; border-radius: 16px; padding: 18px 20px; border: 1px solid #e6e2db; }
+.type__row b { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #888; }
+.type__row div { margin-top: 4px; }
+
+/* 3 · Logos */
+.logos { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; }
+.logo-card { background: #fff; border-radius: 20px; overflow: hidden; border: 1px solid #e6e2db; }
+.logo-card__stage { display: grid; grid-template-columns: 1.4fr 1fr; height: 190px; }
+.logo-card__dark { background: var(--bg); color: var(--ink); display: grid; place-items: center; padding: 16px; }
+.logo-card__light { background: var(--mid); color: var(--mid-ink); display: grid; place-items: center; padding: 16px; }
+.logo-card__body { padding: 16px 18px 18px; }
+.logo-card__body h3 { margin: 0; font-family: Anton, sans-serif; font-weight: 400; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; }
+.logo-card__body h3 span { color: #ff5b1f; margin-right: 6px; }
+.logo-card__body p { margin: 4px 0 0; font-size: 14px; color: #555; }
+.lockup { display: flex; align-items: center; gap: 10px; }
+.lockup svg { width: 56px; height: 56px; flex-shrink: 0; }
+.lockup .word { font-family: Anton, sans-serif; font-size: 34px; letter-spacing: .03em; line-height: 1; }
+.icon-only svg { width: 72px; height: 72px; }
+.acc { color: var(--loud); }
+.fill-acc { fill: var(--loud); }
+.stroke-acc { stroke: var(--loud); }
+.wm-cima { display: flex; align-items: flex-end; font-family: Anton, sans-serif; font-size: 46px; line-height: .8; letter-spacing: .02em; }
+.wm-cima svg { width: .78em; height: .8em; margin: 0 .02em; }
+.wm-firma { font-size: 50px; line-height: 1; display: flex; align-items: baseline; }
+.wm-firma .display { font-size: 1em; }
+.wm-firma .serif { font-size: 1.12em; color: var(--em, var(--loud)); margin-left: .04em; }
+.wm-small { font-size: 30px !important; }
+
+/* 4 · Así se vería */
+.mock { border-radius: 18px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,.25); background: var(--bg); color: var(--ink); }
+.mock__bar { display: flex; gap: 6px; padding: 10px 14px; background: rgba(0,0,0,.35); }
+.mock__bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.35); }
+.hero { position: relative; min-height: 600px; display: grid; grid-template-columns: 1.15fr 1fr; overflow: hidden; }
+.hero__nav { position: absolute; z-index: 3; top: 18px; left: 24px; right: 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.hero__nav .lockup svg { width: 34px; height: 34px; }
+.hero__nav .lockup .word { font-size: 22px; }
+.hero__links { display: flex; gap: 18px; padding: 9px 20px; border-radius: 999px; background: color-mix(in srgb, var(--ink) 10%, transparent); font-size: 13px; font-weight: 500; backdrop-filter: blur(8px); }
+.hero__cta { padding: 10px 18px; border-radius: 999px; background: var(--loud); color: var(--on-loud); font-size: 13px; font-weight: 700; }
+.hero__text { position: relative; z-index: 2; padding: 120px 0 50px 44px; display: flex; flex-direction: column; justify-content: center; }
+.hero__tag { display: inline-flex; align-self: flex-start; gap: 8px; align-items: center; padding: 6px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.hero__tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--loud); }
+.hero h3 { font-size: clamp(54px, 7vw, 100px); margin: 22px 0 18px; }
+.hero h3 .serif { color: var(--em, var(--loud)); font-size: 1.08em; }
+.hero p { color: var(--soft); max-width: 430px; margin: 0 0 26px; }
+.hero__btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px; font-weight: 700; font-size: 15px; }
+.btn--loud { background: var(--loud); color: var(--on-loud); }
+.btn--line { border: 1.5px solid color-mix(in srgb, var(--ink) 40%, transparent); }
+.hero__stats { display: flex; gap: 30px; margin-top: 34px; }
+.hero__stats b { display: block; font-family: Anton, sans-serif; font-weight: 400; font-size: 34px; line-height: 1; }
+.hero__stats span { font-size: 12px; color: var(--soft); }
+.hero__photo { position: relative; }
+.hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.hero__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--bg) 0%, transparent 35%), linear-gradient(0deg, color-mix(in srgb, var(--bg) 60%, transparent), transparent 40%); }
+.hero__badge { position: absolute; z-index: 2; right: 24px; bottom: 28px; padding: 12px 16px; border-radius: 14px; background: var(--mid); color: var(--mid-ink); font-size: 13px; }
+.hero__badge b { display: block; font-size: 15px; }
+.hero__ribbon { display: flex; gap: 40px; white-space: nowrap; padding: 14px 0; background: var(--loud); color: var(--on-loud); font-family: Anton, sans-serif; font-size: 22px; letter-spacing: .04em; text-transform: uppercase; overflow: hidden; }
+.hero__ribbon span::after { content: "✦"; margin-left: 40px; }
+
+.posts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+.post { aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden; position: relative; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.post--a { background: var(--bg); color: var(--ink); }
+.post--b { background: var(--mid); color: var(--mid-ink); }
+.post--c { background: var(--loud); color: var(--on-loud); }
+.post--c .lockup { --loud: var(--on-loud); }
+.post .display { font-size: clamp(34px, 4.4vw, 52px); }
+.post .serif { font-size: 1.1em; }
+.post--a .serif, .post--b .serif { color: var(--em, var(--loud)); }
+.post small { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .8; }
+.post .lockup svg { width: 26px; height: 26px; }
+.post .lockup .word { font-size: 16px; }
+.post--photo { padding: 0; }
+.post--photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+.post--photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, var(--bg), transparent 60%); }
+.post--photo .post__in { position: relative; z-index: 2; margin-top: auto; padding: 22px; color: var(--ink); }
+
+/* 5 · Elegir */
+.choose { background: #111; color: #fff; border-radius: 24px; padding: 40px; }
+.choose h2 { font-family: Anton, sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(34px, 5vw, 56px); margin: 0 0 10px; line-height: 1; }
+.choose h2 .serif { color: #ff5b1f; }
+.choose ol { margin: 18px 0 0; padding-left: 20px; display: grid; gap: 8px; color: #ddd; }
+.choose code { background: #222; padding: 3px 8px; border-radius: 6px; color: #fff; }
+
+@media (max-width: 860px) {
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .palgrid, .type { grid-template-columns: 1fr; }
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .hero__photo { height: 420px; order: -1; }
+  .hero__photo::after { background: linear-gradient(0deg, var(--bg) 0%, transparent 50%); }
+  .hero__text { padding: 10px 22px 34px; }
+  .hero__links { display: none; }
+  .posts { grid-template-columns: 1fr; max-width: 380px; }
+  .pals { margin-left: 0; }
+}
+</style>
+</head>
+<body data-pal="blaze">
+
+<!-- Íconos de logo (se reutilizan en todo el documento) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- A · Barra: la S cruzada por una barra con discos -->
+  <symbol id="lg-barra" viewBox="0 0 100 100">
+    <g class="fill-acc"><rect x="6" y="36" width="9" height="28" rx="3"/><rect x="85" y="36" width="9" height="28" rx="3"/><rect x="15" y="47" width="70" height="6" rx="3"/></g>
+    <path d="M70 24 C61 12 30 13 30 33 C30 51 70 48 70 67 C70 88 37 90 28 77" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
+  </symbol>
+  <!-- B · Bloque: S construida con bloques, como discos apilados -->
+  <symbol id="lg-bloque" viewBox="0 0 100 100">
+    <g fill="currentColor"><rect x="18" y="12" width="64" height="18" rx="4"/><rect x="18" y="12" width="18" height="44" rx="4"/><rect x="64" y="44" width="18" height="44" rx="4"/><rect x="18" y="70" width="64" height="18" rx="4"/></g>
+    <rect class="fill-acc" x="18" y="41" width="64" height="18" rx="4"/>
+  </symbol>
+  <!-- C · Cima: triángulo que reemplaza la A -->
+  <symbol id="lg-cima" viewBox="0 0 80 100"><path class="fill-acc" d="M40 4 L78 100 H56 L40 56 L24 100 H2 Z"/></symbol>
+  <!-- E · Balance: mancuerna con un disco en forma de hoja -->
+  <symbol id="lg-balance" viewBox="0 0 100 100">
+    <g fill="currentColor"><rect x="10" y="30" width="14" height="40" rx="4"/><rect x="24" y="37" width="8" height="26" rx="3"/><rect x="32" y="46" width="34" height="8" rx="4"/></g>
+    <path class="fill-acc" d="M64 50 C64 30 80 18 94 16 C96 34 88 58 64 50 Z"/>
+    <path d="M70 47 C76 40 82 32 88 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" opacity=".55"/>
+    <path class="fill-acc" d="M64 50 C66 66 80 78 94 80 C94 66 84 52 64 50 Z" opacity=".55"/>
+  </symbol>
+  <!-- F · Progreso: tres barras inclinadas que crecen (semana a semana) -->
+  <symbol id="lg-progreso" viewBox="0 0 100 100">
+    <g transform="skewX(-14) translate(14 0)">
+      <rect x="12" y="56" width="18" height="32" rx="4" fill="currentColor" opacity=".55"/>
+      <rect x="38" y="36" width="18" height="52" rx="4" fill="currentColor"/>
+      <rect class="fill-acc" x="64" y="12" width="18" height="76" rx="4"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="topbar">
+  <div class="wrap">
+    <span class="topbar__brand">SABFIT · MARCA</span>
+    <nav aria-label="Índice">
+      <a href="#paletas">1 Paletas</a><a href="#tipografia">2 Tipografía</a><a href="#logos">3 Logos</a><a href="#aplicacion">4 Así se vería</a><a href="#elegir">5 Elegir</a>
+    </nav>
+    <div class="pals" role="group" aria-label="Probar paleta">
+      <button type="button" data-set="blaze"><i><b style="background:#0b0c0c"></b><b style="background:#f2eee8"></b><b style="background:#ff5b1f"></b></i>Blaze</button>
+      <button type="button" data-set="volt"><i><b style="background:#0e0e10"></b><b style="background:#6e3bff"></b><b style="background:#7cf2c4"></b></i>Volt</button>
+      <button type="button" data-set="pulse"><i><b style="background:#0a0f1c"></b><b style="background:#2f7bff"></b><b style="background:#ff8a5b"></b></i>Pulse</button>
+      <button type="button" data-set="sky"><i><b style="background:#2c9bff"></b><b style="background:#f5f6f2"></b><b style="background:#e8432e"></b></i>Sky</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap intro">
+    <h1 class="display">Tu marca, <span class="serif">sin</span> lo genérico</h1>
+    <p>Basado en tus referencias: <strong>dos colores tranquilos que crean el ambiente y uno fuerte que le da personalidad</strong>, títulos grandes y condensados con una palabra en cursiva, y tu foto como protagonista. Recorre los 5 pasos y al final me dices qué elegiste.</p>
+    <div class="steps">
+      <a href="#paletas"><b>01</b><span>Elige una paleta</span></a>
+      <a href="#tipografia"><b>02</b><span>Mira la tipografía</span></a>
+      <a href="#logos"><b>03</b><span>Elige un logo (A–G)</span></a>
+      <a href="#aplicacion"><b>04</b><span>Mira cómo se vería</span></a>
+    </div>
+  </div>
+
+  <!-- 1 · PALETAS -->
+  <section class="block" id="paletas">
+    <div class="wrap">
+      <div class="block__head"><span class="block__num">01</span><h2>Paletas</h2>
+        <p>Toca una paleta: toda esta página (logos, web e Instagram) cambia de color para que la veas aplicada. Las proporciones importan: el color fuerte se usa poco, solo para lo que debe llamar la atención (botones, una palabra, un detalle).</p></div>
+      <div class="palgrid">
+        <button type="button" class="pal" data-set="blaze">
+          <div class="pal__sw"><div style="background:#0b0c0c;color:#f2eee8">Obsidiana<small>#0B0C0C</small></div><div style="background:#f2eee8;color:#0b0c0c">Hueso<small>#F2EEE8</small></div><div style="background:#ff5b1f;color:#0b0c0c">Blaze<small>#FF5B1F</small></div></div>
+          <div class="pal__body"><h3>1 · Blaze</h3><p>Negro profundo + hueso + naranja fuego. Esfuerzo, intensidad, calor del entrenamiento. Elegante y potente a la vez.</p><span class="pal__ref">Basada en tu referencia 4 (Obsidian + Blaze Orange)</span></div>
+        </button>
+        <button type="button" class="pal" data-set="volt">
+          <div class="pal__sw"><div style="background:#0e0e10;color:#f4f3ff">Ónix<small>#0E0E10</small></div><div style="background:#6e3bff;color:#fff">Índigo eléctrico<small>#6E3BFF</small></div><div style="background:#7cf2c4;color:#0e0e10">Menta<small>#7CF2C4</small></div></div>
+          <div class="pal__body"><h3>2 · Volt</h3><p>Negro + índigo eléctrico + menta tropical. Moderna y diferente: casi ningún entrenador usa estos colores, te recuerdan al instante.</p><span class="pal__ref">Basada en tu referencia 2 (Onyx + Indigo + Mint)</span></div>
+        </button>
+        <button type="button" class="pal" data-set="pulse">
+          <div class="pal__sw"><div style="background:#0a0f1c;color:#eef3ff">Medianoche<small>#0A0F1C</small></div><div style="background:#2f7bff;color:#fff">Azul eléctrico<small>#2F7BFF</small></div><div style="background:#ff8a5b;color:#0a0f1c">Melón<small>#FF8A5B</small></div></div>
+          <div class="pal__body"><h3>3 · Pulse</h3><p>Azul medianoche + azul eléctrico + naranja melón. Ciencia y energía: ideal si quieres resaltar la parte de nutrición y datos.</p><span class="pal__ref">Basada en tu referencia 3 (Midnight + Blue + Cantaloupe)</span></div>
+        </button>
+        <button type="button" class="pal" data-set="sky">
+          <div class="pal__sw"><div style="background:#2c9bff;color:#fff">Cielo<small>#2C9BFF</small></div><div style="background:#f5f6f2;color:#0b1b2b">Nube<small>#F5F6F2</small></div><div style="background:#e8432e;color:#fff">Ámbar rojo<small>#E8432E</small></div></div>
+          <div class="pal__body"><h3>4 · Sky</h3><p>Azul cielo + blanco nube + rojo ámbar. Luminosa, fresca y cercana. La única clara de las cuatro.</p><span class="pal__ref">Basada en tu referencia 1 (Sky Blue + White + Amber Red)</span></div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · TIPOGRAFÍA -->
+  <section class="block" id="tipografia">
+    <div class="wrap">
+      <div class="block__head"><span class="block__num">02</span><h2>Tipografía</h2>
+        <p>Igual que en tus referencias: una letra condensada y fuerte para los títulos, una cursiva elegante para la palabra que quieres resaltar, y una letra limpia para leer.</p></div>
+      <div class="type">
+        <div class="type__card"><div class="display">Más fuerte <span class="serif">cada</span> semana</div></div>
+        <div class="type__list">
+          <div class="type__row"><b>Títulos · Anton</b><div class="display" style="font-size:40px">HIPERTROFIA REAL</div></div>
+          <div class="type__row"><b>Palabra destacada · Instrument Serif</b><div class="serif" style="font-size:42px;line-height:1">con propósito</div></div>
+          <div class="type__row"><b>Textos · Inter</b><div>Planes de entrenamiento y orientación nutricional basados en ciencia, con seguimiento cercano por WhatsApp.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · LOGOS -->
+  <section class="block" id="logos">
+    <div class="wrap">
+      <div class="block__head"><span class="block__num">03</span><h2>Logos</h2>
+        <p>Siete ideas que cuentan de qué se trata SabFit: fuerza, progreso, nutrición y tu nombre. Cada una se ve sobre el color oscuro y sobre el color secundario de la paleta que elegiste arriba.</p></div>
+      <div class="logos">
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark"><div class="lockup"><svg><use href="#lg-barra"/></svg><span class="word">SABFIT</span></div></div>
+            <div class="logo-card__light icon-only"><svg><use href="#lg-barra"/></svg></div>
+          </div>
+          <div class="logo-card__body"><h3><span>A</span>Barra</h3><p>La S de SabFit atravesada por una barra con discos. Se entiende al instante: fuerza y entrenamiento.</p></div>
+        </article>
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark"><div class="lockup"><svg><use href="#lg-bloque"/></svg><span class="word">SABFIT</span></div></div>
+            <div class="logo-card__light icon-only"><svg><use href="#lg-bloque"/></svg></div>
+          </div>
+          <div class="logo-card__body"><h3><span>B</span>Bloque</h3><p>Una S construida con bloques, como discos apilados. El bloque del centro es tu núcleo: constancia. Muy fuerte como ícono de perfil.</p></div>
+        </article>
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark"><div class="wm-cima">S<svg><use href="#lg-cima"/></svg>BFIT</div></div>
+            <div class="logo-card__light"><div class="wm-cima wm-small" style="font-size:30px">S<svg><use href="#lg-cima"/></svg>B</div></div>
+          </div>
+          <div class="logo-card__body"><h3><span>C</span>Cima</h3><p>La A se convierte en una cima: llegar a tu meta. Solo letras, limpio y fácil de recordar.</p></div>
+        </article>
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark">
+              <svg viewBox="0 0 120 120" width="150" height="150" aria-label="Insignia SabFit">
+                <defs><path id="ring" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs>
+                <circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                <circle cx="60" cy="60" r="34" fill="none" stroke="currentColor" stroke-width="1" opacity=".5"/>
+                <text font-family="Inter, sans-serif" font-weight="700" font-size="9.5" letter-spacing="2.6" fill="currentColor"><textPath href="#ring">SABFIT · ENTRENAMIENTO · BOGOTÁ ·</textPath></text>
+                <text x="60" y="72" text-anchor="middle" font-family="Anton, sans-serif" font-size="34" fill="currentColor">SF</text>
+                <circle class="fill-acc" cx="60" cy="104" r="3.5"/>
+              </svg>
+            </div>
+            <div class="logo-card__light"><svg viewBox="0 0 120 120" width="96" height="96"><circle cx="60" cy="60" r="56" fill="none" stroke="currentColor" stroke-width="4"/><text x="60" y="76" text-anchor="middle" font-family="Anton, sans-serif" font-size="44" fill="currentColor">SF</text><circle class="fill-acc" cx="60" cy="100" r="5"/></svg></div>
+          </div>
+          <div class="logo-card__body"><h3><span>D</span>Club</h3><p>Insignia de club deportivo con tu ciudad. Transmite comunidad y pertenencia: "ser parte de SabFit". Ideal para camisetas y stickers.</p></div>
+        </article>
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark"><div class="lockup"><svg><use href="#lg-balance"/></svg><span class="word">SABFIT</span></div></div>
+            <div class="logo-card__light icon-only"><svg><use href="#lg-balance"/></svg></div>
+          </div>
+          <div class="logo-card__body"><h3><span>E</span>Balance</h3><p>Una mancuerna donde un disco es una hoja: entrenamiento + nutrición en un solo símbolo. Cuenta exactamente lo que ofreces.</p></div>
+        </article>
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark"><div class="lockup"><svg><use href="#lg-progreso"/></svg><span class="word">SABFIT</span></div></div>
+            <div class="logo-card__light icon-only"><svg><use href="#lg-progreso"/></svg></div>
+          </div>
+          <div class="logo-card__body"><h3><span>F</span>Progreso</h3><p>Tres barras que crecen e inclinadas hacia adelante: cada semana más fuerte. Representa la hipertrofia y la sobrecarga progresiva.</p></div>
+        </article>
+        <article class="logo-card">
+          <div class="logo-card__stage">
+            <div class="logo-card__dark"><div class="wm-firma"><span class="display">SAB</span><span class="serif">fit</span></div></div>
+            <div class="logo-card__light"><div class="wm-firma" style="font-size:40px"><span class="display">S</span><span class="serif">f</span></div></div>
+          </div>
+          <div class="logo-card__body"><h3><span>G</span>Firma</h3><p>"SAB" de Sabata, fuerte y condensado, y "fit" en cursiva elegante. Es la mezcla de tus referencias: marca personal con estilo editorial.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · APLICACIÓN -->
+  <section class="block" id="aplicacion">
+    <div class="wrap">
+      <div class="block__head"><span class="block__num">04</span><h2>Así se vería</h2>
+        <p>La portada de tu página con la paleta elegida: tu foto grande como protagonista, título condensado con una palabra en cursiva y un solo color fuerte para lo importante. Abajo, publicaciones de Instagram con la misma identidad.</p></div>
+      <div class="mock">
+        <div class="mock__bar"><i></i><i></i><i></i></div>
+        <div class="hero">
+          <div class="hero__nav">
+            <div class="lockup"><svg><use href="#lg-progreso"/></svg><span class="word">SABFIT</span></div>
+            <div class="hero__links"><span>Servicios</span><span>Empezar</span><span>Test</span><span>Sobre mí</span></div>
+            <span class="hero__cta">Agenda tu cita</span>
+          </div>
+          <div class="hero__text">
+            <span class="hero__tag"><i></i>Entrenador personal · Bogotá</span>
+            <h3 class="display">Entrena con <span class="serif">propósito.</span><br>Come con <span class="serif">sentido.</span></h3>
+            <p>Hipertrofia, hábitos y orientación nutricional basados en ciencia, con seguimiento cercano por WhatsApp.</p>
+            <div class="hero__btns"><span class="btn btn--loud">Agenda tu evaluación →</span><span class="btn btn--line">Haz el test gratis</span></div>
+            <div class="hero__stats"><div><b>ECEP</b><span>Certificado</span></div><div><b>100%</b><span>Personalizado</span></div><div><b>1:1</b><span>Seguimiento</span></div></div>
+          </div>
+          <div class="hero__photo">
+            <img src="https://sabfit.online/wp-content/uploads/2026/10/c7890c43-269e-4a64-a608-14b0e40931cf-2.jpeg" alt="Ángel Sabata">
+            <div class="hero__badge"><b>Ángel Sabata</b>Experto en hipertrofia</div>
+          </div>
+        </div>
+        <div class="hero__ribbon"><span>Hipertrofia</span><span>Hábitos</span><span>Nutrición</span><span>Constancia</span><span>Resultados</span><span>Hipertrofia</span></div>
+      </div>
+
+      <div class="posts">
+        <div class="post post--a">
+          <small>Tip de la semana</small>
+          <div class="display">Proteína en <span class="serif">cada</span> comida</div>
+          <div class="lockup"><svg><use href="#lg-progreso"/></svg><span class="word">SABFIT</span></div>
+        </div>
+        <div class="post post--photo">
+          <img src="https://sabfit.online/wp-content/uploads/2026/10/c7890c43-269e-4a64-a608-14b0e40931cf-2.jpeg" alt="">
+          <div class="post__in"><small>Cupos abiertos</small><div class="display">Tu cambio <span class="serif">empieza</span> hoy</div></div>
+        </div>
+        <div class="post post--c">
+          <small>Mito vs. realidad</small>
+          <div class="display">Comer de noche <span class="serif">no</span> engorda</div>
+          <div class="lockup"><svg><use href="#lg-progreso"/></svg><span class="word">SABFIT</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · ELEGIR -->
+  <section class="block" id="elegir">
+    <div class="wrap">
+      <div class="choose">
+        <h2>¿Cuál es <span class="serif">tuya?</span></h2>
+        <p>Respóndeme con algo así:</p>
+        <ol>
+          <li><strong>Paleta:</strong> Blaze, Volt, Pulse o Sky (o "Blaze pero con el azul de Pulse").</li>
+          <li><strong>Logo:</strong> una letra de la A a la G (puedes elegir 2 y los mezclo).</li>
+          <li><strong>Lo que NO te gustó</strong>, para no repetirlo.</li>
+        </ol>
+        <p style="margin-top:18px;color:#bbb">Ejemplo: <code>Paleta Blaze · Logo F y G · no me gusta el azul</code></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  (function () {
+    var btns = document.querySelectorAll("[data-set]");
+    function apply(p) {
+      document.body.setAttribute("data-pal", p);
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === p)); });
+    }
+    btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.set); }); });
+    apply(new URLSearchParams(location.search).get("paleta") || "blaze");
+  })();
+</script>
+</body>
+</html>
