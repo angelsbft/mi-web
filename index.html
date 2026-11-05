@@ -35,7 +35,7 @@
       </button>
 
       <nav class="nav" id="nav">
-        <a href="#inicio" class="nav__link">Inicio</a>
+        <a href="#precios" class="nav__link">Precios</a>
         <a href="#servicios" class="nav__link">Servicios</a>
         <a href="#empezar" class="nav__link">Empezar</a>
         <a href="#test" class="nav__link">Test</a>
@@ -141,8 +141,138 @@
           </article>
         </div>
 
+        <!-- Programas especiales -->
+        <div class="programs">
+          <h3 class="steps__title reveal">Programas <em class="em">especiales</em></h3>
+          <div class="programs__grid">
+            <a href="#" class="program reveal" data-wa="¡Hola Ángel! 👋 Me interesa el *Programa Adulto Mayor 60+* de SabFit. ¿Me cuentas cómo funciona?&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+              <span class="program__emoji" aria-hidden="true">🧓</span>
+              <h4>Adulto mayor 60+</h4>
+              <p>Fuerza, equilibrio y movilidad para ganar independencia y prevenir caídas, a tu ritmo.</p>
+              <span class="program__link">Consultar →</span>
+            </a>
+            <a href="#" class="program reveal" data-wa="¡Hola Ángel! 👋 Soy deportista y me interesa el *Programa Deportista* de SabFit.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+              <span class="program__emoji" aria-hidden="true">🏆</span>
+              <h4>Deportistas</h4>
+              <p>Fuerza, potencia y prevención de lesiones según tu deporte y tu temporada.</p>
+              <span class="program__link">Consultar →</span>
+            </a>
+            <a href="#" class="program reveal" data-wa="¡Hola Ángel! 👋 Me interesa el *Programa Salud y Movimiento* de SabFit. Tengo una condición de salud o lesión.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+              <span class="program__emoji" aria-hidden="true">❤️</span>
+              <h4>Salud y movimiento</h4>
+              <p>Ejercicio adaptado si tienes sobrepeso, diabetes, hipertensión o molestias, con aval de tu médico.</p>
+              <span class="program__link">Consultar →</span>
+            </a>
+            <a href="#" class="program reveal" data-wa="¡Hola Ángel! 👋 Quiero una *Consultoría puntual* con SabFit.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+              <span class="program__emoji" aria-hidden="true">💬</span>
+              <h4>Consultoría puntual</h4>
+              <p>Una sesión para revisar tu rutina, corregir tu técnica o resolver dudas de alimentación.</p>
+              <span class="program__link">Consultar →</span>
+            </a>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- ===== Planes y precios ===== -->
+    <section class="section section--alt" id="precios">
+      <div class="container">
+        <header class="section__header reveal">
+          <span class="tag">Planes y precios</span>
+          <h2 class="section__title">Invierte en <em class="em">ti</em></h2>
+          <p class="section__text">Precios claros y accesibles. Elige la modalidad y el plan que mejor se ajusta a ti.</p>
+        </header>
+
+        <fieldset class="pricing__modes reveal">
+          <legend class="sr-only">Modalidad</legend>
+          <label class="pill"><input type="radio" name="priceMode" value="online" checked><span>💻 Online · mensual</span></label>
+          <label class="pill"><input type="radio" name="priceMode" value="presencial"><span>📍 Presencial · Bogotá</span></label>
+        </fieldset>
+
+        <div class="prices" data-price-panel="online">
+          <article class="price reveal">
+            <h3>Entrenamiento online</h3>
+            <p class="price__amount"><strong>$90.000</strong><span>/ mes</span></p>
+            <ul class="price__list">
+              <li>Rutina personalizada para casa o gimnasio</li>
+              <li>Explicación de técnica de cada ejercicio</li>
+              <li>Ajustes de la rutina cada 4 semanas</li>
+              <li>Seguimiento semanal por WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--ghost btn--block" data-wa="¡Hola Ángel! 👋 Quiero el plan *Entrenamiento online* ($90.000/mes).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir plan</a>
+          </article>
+          <article class="price price--featured reveal">
+            <span class="card__badge">Más elegido</span>
+            <h3>Entrenamiento + Orientación nutricional</h3>
+            <p class="price__amount"><strong>$140.000</strong><span>/ mes</span></p>
+            <ul class="price__list">
+              <li>Todo lo del entrenamiento online</li>
+              <li>Guía de hábitos de alimentación</li>
+              <li>Ideas de comidas y lista de compras</li>
+              <li>Re-evaluación mensual de tu progreso</li>
+            </ul>
+            <a href="#" class="btn btn--wa btn--block" data-wa="¡Hola Ángel! 👋 Quiero el plan *Entrenamiento + Orientación nutricional* ($140.000/mes).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir plan</a>
+          </article>
+          <article class="price reveal">
+            <h3>Orientación nutricional</h3>
+            <p class="price__amount"><strong>$70.000</strong><span>/ mes</span></p>
+            <ul class="price__list">
+              <li>Revisión de tus hábitos actuales</li>
+              <li>Guía de hábitos e ideas de comidas</li>
+              <li>Lista de compras</li>
+              <li>Seguimiento semanal por WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--ghost btn--block" data-wa="¡Hola Ángel! 👋 Quiero el plan *Orientación nutricional* ($70.000/mes).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir plan</a>
+          </article>
+        </div>
+
+        <div class="prices" data-price-panel="presencial" hidden>
+          <article class="price reveal">
+            <h3>Sesión individual</h3>
+            <p class="price__amount"><strong>$45.000</strong><span>/ sesión</span></p>
+            <ul class="price__list">
+              <li>Entrenamiento 1 a 1 de 1 hora</li>
+              <li>Corrección de técnica en vivo</li>
+              <li>Ideal para probar o reforzar</li>
+            </ul>
+            <a href="#" class="btn btn--ghost btn--block" data-wa="¡Hola Ángel! 👋 Quiero agendar una *Sesión individual* presencial ($45.000).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Agendar sesión</a>
+          </article>
+          <article class="price price--featured reveal">
+            <span class="card__badge">Mejor valor</span>
+            <h3>Paquete 8 sesiones</h3>
+            <p class="price__amount"><strong>$320.000</strong><span>/ mes</span></p>
+            <p class="price__note">2 sesiones por semana · $40.000 cada una</p>
+            <ul class="price__list">
+              <li>8 entrenamientos 1 a 1 en el mes</li>
+              <li>Rutina para los días que entrenas solo/a</li>
+              <li>Seguimiento por WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--wa btn--block" data-wa="¡Hola Ángel! 👋 Quiero el *Paquete de 8 sesiones* presenciales ($320.000).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir paquete</a>
+          </article>
+          <article class="price reveal">
+            <h3>Paquete 12 sesiones</h3>
+            <p class="price__amount"><strong>$450.000</strong><span>/ mes</span></p>
+            <p class="price__note">3 sesiones por semana · $37.500 cada una</p>
+            <ul class="price__list">
+              <li>12 entrenamientos 1 a 1 en el mes</li>
+              <li>Progresión más rápida</li>
+              <li>Seguimiento por WhatsApp</li>
+            </ul>
+            <a href="#" class="btn btn--ghost btn--block" data-wa="¡Hola Ángel! 👋 Quiero el *Paquete de 12 sesiones* presenciales ($450.000).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir paquete</a>
+          </article>
+        </div>
+
+        <ul class="price-extras reveal">
+          <li><strong>Evaluación presencial</strong><span>$60.000</span></li>
+          <li><strong>Primera reunión online (20 min)</strong><span>Gratis</span></li>
+          <li><strong>Consultoría puntual</strong><span>$40.000</span></li>
+          <li><strong>Plan de 3 meses</strong><span>10% de descuento</span></li>
+        </ul>
+        <p class="price-note reveal">Valores en pesos colombianos (COP). Los programas Adulto mayor, Deportistas y Salud tienen el mismo valor según la modalidad. <strong>Cupos limitados cada mes.</strong></p>
+      </div>
+    </section>
+
+
 
     <!-- ===== Cómo empezar / primera cita ===== -->
     <section class="section section--alt" id="empezar">
@@ -172,7 +302,7 @@
               <li><strong>Fotos de progreso</strong> (opcionales y privadas).</li>
               <li><strong>Objetivos claros</strong> y la ruta para lograrlos.</li>
             </ul>
-            <p class="visit__price">💲 Tiene un costo porque incluye mediciones y una valoración completa. <strong>Escríbeme para conocer el valor.</strong></p>
+            <p class="visit__price">💲 Tiene un costo de <strong>$60.000</strong> porque incluye mediciones y una valoración completa.</p>
             <a href="#agendar" class="btn btn--primary btn--block" data-book="presencial">Agendar evaluación presencial</a>
           </article>
 
@@ -272,7 +402,7 @@
         <header class="section__header reveal">
           <span class="tag">Test gratuito · 1 minuto</span>
           <h2 class="section__title">¿Qué plan es <em class="em">para ti?</em></h2>
-          <p class="section__text">Responde 6 preguntas rápidas y descubre tu perfil, el plan que más te conviene y consejos para empezar hoy.</p>
+          <p class="section__text">Cuéntame qué buscas, responde unas preguntas rápidas y descubre tu perfil, el plan que más te conviene y consejos para empezar hoy.</p>
         </header>
 
         <div class="quiz reveal" id="quiz">
@@ -439,7 +569,7 @@
           </details>
           <details class="faq__item">
             <summary>¿Cuánto cuestan los planes?</summary>
-            <p>Depende del plan y de su duración. Escríbeme por WhatsApp y te envío las opciones con sus valores.</p>
+            <p>Los planes online empiezan desde $70.000 al mes y las sesiones presenciales desde $45.000. Mira todos los valores en la sección <a href="#precios">Planes y precios</a>; si tomas 3 meses tienes 10% de descuento.</p>
           </details>
         </div>
         <p class="faq__more reveal">¿Tienes otra pregunta? <a href="#" data-wa="¡Hola Ángel! 👋 Vengo de la página de SabFit y quiero más información sobre tus planes.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Escríbeme por WhatsApp →</a></p>
@@ -475,6 +605,10 @@
             <option>Orientación nutricional</option>
             <option selected>Entrenamiento + Orientación nutricional</option>
             <option>Entrenamiento personal</option>
+            <option>Programa Adulto mayor 60+</option>
+            <option>Programa Deportistas</option>
+            <option>Programa Salud y movimiento</option>
+            <option>Consultoría puntual</option>
             <option>Tengo otra consulta</option>
           </select>
 

@@ -164,9 +164,32 @@ if (booking) {
 }
 
 // Test "¿Qué plan es para ti?"
-// Cada opción suma puntos a nutrición (n) y/o entrenamiento (t).
-// El resultado (perfil) depende de la respuesta a la primera pregunta.
-const QUIZ_QUESTIONS = [
+// 1) La primera pregunta elige el tipo de acompañamiento (QUIZ_SEGMENT).
+// 2) Cada tipo tiene sus propias preguntas (QUIZ_FLOWS).
+// En el flujo general, cada opción suma puntos a nutrición (n) y/o entrenamiento (t)
+// y el perfil depende de la respuesta a "¿Cuál es tu objetivo principal?".
+const QUIZ_SEGMENT = {
+  question: "¿Qué tipo de acompañamiento buscas?",
+  options: [
+    { emoji: "🏋️", text: "Quiero entrenar y/o comer mejor", segment: "general" },
+    { emoji: "🧓", text: "Soy adulto mayor (60+) o busco para un familiar", segment: "mayor" },
+    { emoji: "🏆", text: "Soy deportista", segment: "deportista" },
+    { emoji: "❤️", text: "Tengo una condición de salud o una lesión", segment: "salud" },
+    { emoji: "💬", text: "Solo quiero una consultoría puntual", segment: "consultoria" },
+  ],
+};
+
+const QUIZ_MODALITY = {
+  question: "¿Cómo te gustaría el acompañamiento?",
+  options: [
+    { emoji: "📱", text: "Online, a mi ritmo" },
+    { emoji: "🤝", text: "Presencial" },
+    { emoji: "🔀", text: "Una mezcla de ambos" },
+    { emoji: "💬", text: "Aún no sé, quiero conversarlo" },
+  ],
+};
+
+const QUIZ_GENERAL = [
   {
     question: "¿Cuál es tu objetivo principal?",
     options: [
@@ -214,16 +237,144 @@ const QUIZ_QUESTIONS = [
       { emoji: "⏰", text: "Encontrar tiempo", n: 1, t: 1 },
     ],
   },
-  {
-    question: "¿Cómo te gustaría el acompañamiento?",
-    options: [
-      { emoji: "📱", text: "Online, a mi ritmo" },
-      { emoji: "🤝", text: "Presencial" },
-      { emoji: "🔀", text: "Una mezcla de ambos" },
-      { emoji: "💬", text: "Aún no sé, quiero conversarlo" },
+  QUIZ_MODALITY,
+];
+
+const QUIZ_FLOWS = {
+  general: { questions: QUIZ_GENERAL },
+  mayor: {
+    profile: "mayor",
+    plan: "mayor",
+    questions: [
+      {
+        question: "¿Qué es lo más importante para ti?",
+        options: [
+          { emoji: "🚶", text: "Moverme con más facilidad" },
+          { emoji: "⚖️", text: "Ganar fuerza y equilibrio" },
+          { emoji: "🩺", text: "Cuidar mi salud (presión, azúcar, huesos)" },
+          { emoji: "☀️", text: "Mantenerme activo/a y con energía" },
+        ],
+      },
+      {
+        question: "¿Cómo está tu movilidad hoy?",
+        options: [
+          { emoji: "👍", text: "Me muevo bien" },
+          { emoji: "😐", text: "Tengo algunas molestias" },
+          { emoji: "🪜", text: "Me cuesta levantarme o subir escaleras" },
+          { emoji: "🦯", text: "Uso apoyo (bastón o caminador)" },
+        ],
+      },
+      {
+        question: "¿Tienes alguna condición médica?",
+        options: [
+          { emoji: "✅", text: "No" },
+          { emoji: "💊", text: "Sí, y está controlada" },
+          { emoji: "❓", text: "Sí, y quiero orientación" },
+          { emoji: "🔒", text: "Prefiero contarlo en privado" },
+        ],
+      },
+      QUIZ_MODALITY,
     ],
   },
-];
+  deportista: {
+    profile: "sport",
+    plan: "deportista",
+    questions: [
+      {
+        question: "¿Qué deporte practicas?",
+        options: [
+          { emoji: "⚽", text: "Fútbol u otro deporte de equipo" },
+          { emoji: "🚴", text: "Running, ciclismo o resistencia" },
+          { emoji: "🏋️", text: "Gimnasio, fuerza o culturismo" },
+          { emoji: "🥊", text: "Otro deporte" },
+        ],
+      },
+      {
+        question: "¿Qué quieres mejorar?",
+        options: [
+          { emoji: "💥", text: "Fuerza y potencia" },
+          { emoji: "💪", text: "Masa muscular" },
+          { emoji: "🫁", text: "Resistencia" },
+          { emoji: "🛡️", text: "Prevenir lesiones" },
+        ],
+      },
+      {
+        question: "¿En qué momento de tu temporada estás?",
+        options: [
+          { emoji: "📅", text: "Pretemporada" },
+          { emoji: "🏁", text: "En competencia" },
+          { emoji: "🌙", text: "Fuera de temporada" },
+          { emoji: "🙋", text: "Entreno por mi cuenta, sin competir" },
+        ],
+      },
+      {
+        question: "¿Cómo está tu alimentación para rendir?",
+        options: [
+          { emoji: "🥗", text: "Bien, pero quiero optimizarla" },
+          { emoji: "😅", text: "Podría mejorar bastante" },
+          { emoji: "🤔", text: "No sé qué comer antes y después de entrenar" },
+        ],
+      },
+      QUIZ_MODALITY,
+    ],
+  },
+  salud: {
+    profile: "salud",
+    plan: "salud",
+    questions: [
+      {
+        question: "¿Cuál es tu situación?",
+        options: [
+          { emoji: "⚖️", text: "Sobrepeso u obesidad" },
+          { emoji: "🩸", text: "Diabetes o resistencia a la insulina" },
+          { emoji: "❤️", text: "Hipertensión o colesterol alto" },
+          { emoji: "🦴", text: "Dolor de espalda, articulaciones o una lesión" },
+          { emoji: "📝", text: "Otra situación" },
+        ],
+      },
+      {
+        question: "¿Tienes el visto bueno de tu médico para hacer ejercicio?",
+        options: [
+          { emoji: "✅", text: "Sí" },
+          { emoji: "⏳", text: "Todavía no" },
+          { emoji: "🤷", text: "No sé si lo necesito" },
+        ],
+      },
+      {
+        question: "¿Qué tan activo/a eres hoy?",
+        options: [
+          { emoji: "🛋️", text: "Casi nada" },
+          { emoji: "🚶", text: "Algo, camino o hago poco ejercicio" },
+          { emoji: "🏃", text: "Bastante, pero quiero hacerlo bien" },
+        ],
+      },
+      QUIZ_MODALITY,
+    ],
+  },
+  consultoria: {
+    profile: "consultoria",
+    plan: "consultoria",
+    questions: [
+      {
+        question: "¿Sobre qué quieres la consultoría?",
+        options: [
+          { emoji: "📋", text: "Revisar mi rutina actual" },
+          { emoji: "🎯", text: "Corregir mi técnica" },
+          { emoji: "🍽️", text: "Dudas de alimentación y hábitos" },
+          { emoji: "🧭", text: "Armar un plan para empezar por mi cuenta" },
+        ],
+      },
+      {
+        question: "¿Cómo prefieres la consultoría?",
+        options: [
+          { emoji: "💻", text: "Videollamada" },
+          { emoji: "🤝", text: "Presencial" },
+          { emoji: "💬", text: "Por WhatsApp" },
+        ],
+      },
+    ],
+  },
+};
 
 const QUIZ_PROFILES = {
   fat: {
@@ -266,6 +417,36 @@ const QUIZ_PROFILES = {
       "Trabaja fuerza 2 veces por semana para prevenir lesiones.",
     ],
   },
+  mayor: {
+    emoji: "🧓",
+    title: "Fuerza y Vitalidad 60+",
+    text: "Tu prioridad es moverte con seguridad, ganar fuerza y mantener tu independencia. Con ejercicios adaptados y progresivos se puede mejorar a cualquier edad.",
+    tips: [
+      "Haz ejercicios de fuerza 2 o 3 veces por semana: protegen tus músculos y tus huesos.",
+      "Practica equilibrio a diario, por ejemplo pararte en un pie apoyado en una silla.",
+      "Camina todos los días a un ritmo cómodo y aumenta el tiempo poco a poco.",
+    ],
+  },
+  salud: {
+    emoji: "❤️",
+    title: "Salud en Movimiento",
+    text: "El ejercicio bien dosificado es una gran herramienta para tu salud. Trabajaremos de forma segura, progresiva y coordinada con las indicaciones de tu médico.",
+    tips: [
+      "Antes de empezar, consulta con tu médico y cuéntale qué ejercicio quieres hacer.",
+      "Empieza suave y constante: 10 a 15 minutos al día ya suman.",
+      "Anota cómo te sientes después de moverte: es información muy útil para ajustar tu plan.",
+    ],
+  },
+  consultoria: {
+    emoji: "💬",
+    title: "Consultoría Puntual",
+    text: "Necesitas respuestas concretas: revisar lo que haces, corregir detalles y salir con un plan claro, sin comprometerte a un programa mensual.",
+    tips: [
+      "Ten a mano tu rutina actual o lo que comes en un día normal.",
+      "Escribe tus 3 dudas principales antes de la sesión.",
+      "Si es de técnica, grábate haciendo el ejercicio para revisarlo juntos.",
+    ],
+  },
   habits: {
     emoji: "🧠",
     title: "Reconexión con la Comida",
@@ -291,6 +472,10 @@ const QUIZ_PROFILES = {
 const QUIZ_PLANS = {
   combo: "Entrenamiento + Orientación nutricional",
   nutrition: "Orientación nutricional",
+  mayor: "Programa Adulto mayor 60+",
+  deportista: "Programa Deportistas (entrenamiento + orientación nutricional)",
+  salud: "Programa Salud y movimiento",
+  consultoria: "Consultoría puntual",
   training: "Entrenamiento personal",
 };
 
@@ -306,13 +491,18 @@ if (quiz) {
   let current = 0;
   let answers = [];
 
+  // Preguntas actuales: la de segmento + las del flujo elegido
+  const segmentOf = () => (answers[0] === undefined ? "general" : QUIZ_SEGMENT.options[answers[0]].segment);
+  const questions = () => [QUIZ_SEGMENT, ...QUIZ_FLOWS[segmentOf()].questions];
+
   const showScreen = (name) =>
     screens.forEach((s) => (s.hidden = s.dataset.screen !== name));
 
   function renderQuestion() {
-    const q = QUIZ_QUESTIONS[current];
-    qCount.textContent = `Pregunta ${current + 1} de ${QUIZ_QUESTIONS.length}`;
-    qBar.style.width = `${(current / QUIZ_QUESTIONS.length) * 100}%`;
+    const list = questions();
+    const q = list[current];
+    qCount.textContent = `Pregunta ${current + 1} de ${list.length}`;
+    qBar.style.width = `${(current / list.length) * 100}%`;
     qQuestion.textContent = q.question;
     backBtn.disabled = current === 0;
     qOptions.innerHTML = "";
@@ -336,13 +526,15 @@ if (quiz) {
   }
 
   function choose(i, btn) {
+    // Si cambia el tipo de acompañamiento, se descartan las respuestas del flujo anterior
+    if (current === 0 && answers[0] !== i) answers = [];
     answers[current] = i;
     qOptions.querySelectorAll(".quiz__option").forEach((b) => b.classList.remove("is-selected"));
     btn.classList.add("is-selected");
     qOptions.style.pointerEvents = "none";
     setTimeout(() => {
       qOptions.style.pointerEvents = "";
-      if (current < QUIZ_QUESTIONS.length - 1) {
+      if (current < questions().length - 1) {
         current++;
         renderQuestion();
       } else {
@@ -352,19 +544,27 @@ if (quiz) {
   }
 
   function showResult() {
-    let n = 0;
-    let t = 0;
-    const chosen = answers.map((a, qi) => QUIZ_QUESTIONS[qi].options[a]);
-    chosen.forEach((o) => {
-      n += o.n || 0;
-      t += o.t || 0;
-    });
+    const list = questions();
+    const chosen = answers.map((a, qi) => list[qi].options[a]);
+    const segment = segmentOf();
+    const flow = QUIZ_FLOWS[segment];
 
-    let plan = "combo";
-    if (n - t >= 4) plan = "nutrition";
-    else if (t - n >= 4) plan = "training";
+    let profileKey = flow.profile;
+    let plan = flow.plan;
+    if (segment === "general") {
+      let n = 0;
+      let t = 0;
+      chosen.forEach((o) => {
+        n += o.n || 0;
+        t += o.t || 0;
+      });
+      plan = "combo";
+      if (n - t >= 4) plan = "nutrition";
+      else if (t - n >= 4) plan = "training";
+      profileKey = chosen[1].profile;
+    }
 
-    const profile = QUIZ_PROFILES[chosen[0].profile];
+    const profile = QUIZ_PROFILES[profileKey];
     document.getElementById("resultEmoji").textContent = profile.emoji;
     document.getElementById("resultTitle").textContent = profile.title;
     document.getElementById("resultText").textContent = profile.text;
@@ -377,7 +577,7 @@ if (quiz) {
       tips.appendChild(li);
     });
 
-    const summary = QUIZ_QUESTIONS.map((q, qi) => `• ${q.question} ${chosen[qi].text}`).join("\n");
+    const summary = list.map((q, qi) => `• ${q.question} ${chosen[qi].text}`).join("\n");
     const msg =
       `¡Hola Ángel! 👋 Acabo de hacer el test de SabFit.\n\n` +
       `🏷️ Mi perfil: *${profile.title}*\n` +
@@ -386,7 +586,7 @@ if (quiz) {
       `¿Me cuentas cómo podemos empezar?`;
     const resultWa = document.getElementById("resultWa");
     resultWa.href = whatsappUrl(msg);
-    resultWa.onclick = () => trackWhatsApp(`test_${chosen[0].profile}`);
+    resultWa.onclick = () => trackWhatsApp(`test_${profileKey}`);
 
     qBar.style.width = "100%";
     showScreen("result");
@@ -408,6 +608,16 @@ if (quiz) {
     }
   });
 }
+
+// Planes y precios: cambiar entre online y presencial
+document.querySelectorAll('input[name="priceMode"]').forEach((radio) =>
+  radio.addEventListener("change", () => {
+    document.querySelectorAll("[data-price-panel]").forEach((panel) => {
+      panel.hidden = panel.dataset.pricePanel !== radio.value;
+      panel.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+    });
+  })
+);
 
 // Animaciones de la portada (si no te gustan, borra este bloque y la cinta en index.html)
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -573,6 +573,73 @@ p { margin: 0 0 1em; }
   color: var(--on-primary);
 }
 
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+
+/* Programas especiales */
+.programs { margin-top: 5rem; }
+.programs__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.program {
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.program:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--primary); }
+.program__emoji { font-size: 2rem; line-height: 1; margin-bottom: .9rem; }
+.program h4 { font-size: 1.35rem; margin-bottom: .4rem; }
+.program p { color: var(--muted); font-size: .92rem; flex-grow: 1; }
+.program__link { font-weight: 600; color: var(--primary); }
+.program:hover .program__link { color: var(--accent); }
+
+/* ---------- Planes y precios ---------- */
+.pricing__modes { display: flex; justify-content: center; flex-wrap: wrap; gap: .8rem; margin: 0 0 2.5rem; padding: 0; border: 0; }
+.prices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: stretch; }
+.prices[hidden] { display: none; }
+.price {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.8rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.price h3 { font-size: 1.5rem; margin-bottom: .8rem; }
+.price__amount { display: flex; align-items: baseline; gap: .4rem; margin: 0 0 .3rem; }
+.price__amount strong { font-family: var(--font-head); font-weight: 400; font-size: 2.8rem; line-height: 1; letter-spacing: .01em; }
+.price__amount span { color: var(--muted); font-size: .95rem; }
+.price__note { font-size: .88rem; color: var(--accent); font-weight: 600; margin: 0; }
+.price__list { list-style: none; padding: 0; margin: 1.2rem 0 1.6rem; flex-grow: 1; }
+.price__list li { position: relative; padding-left: 1.6rem; margin-bottom: .6rem; font-size: .95rem; }
+.price__list li::before { content: "✓"; position: absolute; left: 0; color: var(--primary); font-weight: 700; }
+.price--featured { background: var(--grad); color: var(--on-primary); border: 0; box-shadow: var(--shadow-lg); }
+.price--featured .price__amount span { color: rgba(255, 255, 255, .7); }
+.price--featured .price__list li::before { color: var(--leaf); }
+.price--featured .price__note { color: var(--leaf); }
+.price-extras {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.price-extras li {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: 1rem 1.2rem;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  font-size: .9rem;
+}
+.price-extras span { font-family: var(--font-head); font-size: 1.5rem; color: var(--accent); letter-spacing: .01em; }
+.price-note { text-align: center; color: var(--muted); font-size: .9rem; margin: 1.5rem auto 0; max-width: 680px; }
+
 /* ---------- Cómo empezar ---------- */
 .visits {
   display: grid;
@@ -971,6 +1038,9 @@ p { margin: 0 0 1em; }
   .hero__content { padding: 0 0 56px; margin-top: -40px; }
   .cards { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .visits { grid-template-columns: 1fr; max-width: 560px; }
+  .programs__grid, .price-extras { grid-template-columns: repeat(2, 1fr); }
+  .prices { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+  .price--featured { order: -1; }
   .card--featured { order: -1; }
   .steps__list { grid-template-columns: repeat(2, 1fr); }
   .contact__info { text-align: center; }
@@ -1020,6 +1090,7 @@ p { margin: 0 0 1em; }
   .hero__stats { gap: 1.2rem; }
   .hero__stats strong { font-size: 1.7rem; }
   .steps__list { grid-template-columns: 1fr; }
+  .programs__grid { grid-template-columns: 1fr; }
   .footer__inner { flex-direction: column; text-align: center; }
   .footer__links { justify-content: center; }
   .btn--ig { margin: .8rem 0 0; }
