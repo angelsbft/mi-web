@@ -9,22 +9,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* Cada paleta = 2 colores tranquilos (bg, mid) + 1 color fuerte (loud) */
-:root, [data-pal="blaze"] {
+:root, [data-pal="bosque"] {
+  --bg: #0f2a1d; --ink: #f2eee8; --mid: #f2eee8; --mid-ink: #0f2a1d;
+  --loud: #ff5b1f; --on-loud: #0f2a1d; --soft: rgba(242, 238, 232, .66);
+}
+[data-pal="lima"] {
   --bg: #0b0c0c; --ink: #f2eee8; --mid: #f2eee8; --mid-ink: #0b0c0c;
-  --loud: #ff5b1f; --on-loud: #0b0c0c; --soft: rgba(242, 238, 232, .62);
+  --loud: #c2f23d; --on-loud: #0b0c0c; --soft: rgba(242, 238, 232, .62);
 }
-[data-pal="volt"] {
-  --bg: #0e0e10; --ink: #f4f3ff; --mid: #6e3bff; --mid-ink: #ffffff;
-  --loud: #7cf2c4; --on-loud: #0e0e10; --soft: rgba(244, 243, 255, .62);
+[data-pal="esmeralda"] {
+  --bg: #0d0f0e; --ink: #f1f5f2; --mid: #10b981; --mid-ink: #05140d;
+  --loud: #ffb547; --on-loud: #0d0f0e; --soft: rgba(241, 245, 242, .62);
 }
-[data-pal="pulse"] {
-  --bg: #0a0f1c; --ink: #eef3ff; --mid: #2f7bff; --mid-ink: #ffffff;
-  --loud: #ff8a5b; --on-loud: #0a0f1c; --soft: rgba(238, 243, 255, .62);
-}
-[data-pal="sky"] {
-  --bg: #2c9bff; --ink: #ffffff; --mid: #f5f6f2; --mid-ink: #0b1b2b;
-  --loud: #e8432e; --on-loud: #ffffff; --soft: rgba(255, 255, 255, .78);
-  --em: #0b1b2b;
+[data-pal="matcha"] {
+  --bg: #f4f1ea; --ink: #13261b; --mid: #2e5e3e; --mid-ink: #ffffff;
+  --loud: #ff5a36; --on-loud: #ffffff; --soft: rgba(19, 38, 27, .72);
 }
 
 * { box-sizing: border-box; }
@@ -179,7 +178,7 @@ section.block { padding: 60px 0; border-top: 1px solid #e3dfd8; }
 }
 </style>
 </head>
-<body data-pal="blaze">
+<body data-pal="bosque">
 
 <!-- Íconos de logo (se reutilizan en todo el documento) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -219,10 +218,10 @@ section.block { padding: 60px 0; border-top: 1px solid #e3dfd8; }
       <a href="#paletas">1 Paletas</a><a href="#tipografia">2 Tipografía</a><a href="#logos">3 Logos</a><a href="#aplicacion">4 Así se vería</a><a href="#elegir">5 Elegir</a>
     </nav>
     <div class="pals" role="group" aria-label="Probar paleta">
-      <button type="button" data-set="blaze"><i><b style="background:#0b0c0c"></b><b style="background:#f2eee8"></b><b style="background:#ff5b1f"></b></i>Blaze</button>
-      <button type="button" data-set="volt"><i><b style="background:#0e0e10"></b><b style="background:#6e3bff"></b><b style="background:#7cf2c4"></b></i>Volt</button>
-      <button type="button" data-set="pulse"><i><b style="background:#0a0f1c"></b><b style="background:#2f7bff"></b><b style="background:#ff8a5b"></b></i>Pulse</button>
-      <button type="button" data-set="sky"><i><b style="background:#2c9bff"></b><b style="background:#f5f6f2"></b><b style="background:#e8432e"></b></i>Sky</button>
+      <button type="button" data-set="bosque"><i><b style="background:#0f2a1d"></b><b style="background:#f2eee8"></b><b style="background:#ff5b1f"></b></i>Bosque</button>
+      <button type="button" data-set="lima"><i><b style="background:#0b0c0c"></b><b style="background:#f2eee8"></b><b style="background:#c2f23d"></b></i>Lima</button>
+      <button type="button" data-set="esmeralda"><i><b style="background:#0d0f0e"></b><b style="background:#10b981"></b><b style="background:#ffb547"></b></i>Esmeralda</button>
+      <button type="button" data-set="matcha"><i><b style="background:#f4f1ea"></b><b style="background:#2e5e3e"></b><b style="background:#ff5a36"></b></i>Matcha</button>
     </div>
   </div>
 </header>
@@ -243,23 +242,23 @@ section.block { padding: 60px 0; border-top: 1px solid #e3dfd8; }
   <section class="block" id="paletas">
     <div class="wrap">
       <div class="block__head"><span class="block__num">01</span><h2>Paletas</h2>
-        <p>Toca una paleta: toda esta página (logos, web e Instagram) cambia de color para que la veas aplicada. Las proporciones importan: el color fuerte se usa poco, solo para lo que debe llamar la atención (botones, una palabra, un detalle).</p></div>
+        <p>Las cuatro tienen el verde de la nutrición como protagonista. Toca una paleta: toda esta página (logos, web e Instagram) cambia de color para que la veas aplicada. Las proporciones importan: el color fuerte se usa poco, solo para lo que debe llamar la atención (botones, una palabra, un detalle).</p></div>
       <div class="palgrid">
-        <button type="button" class="pal" data-set="blaze">
-          <div class="pal__sw"><div style="background:#0b0c0c;color:#f2eee8">Obsidiana<small>#0B0C0C</small></div><div style="background:#f2eee8;color:#0b0c0c">Hueso<small>#F2EEE8</small></div><div style="background:#ff5b1f;color:#0b0c0c">Blaze<small>#FF5B1F</small></div></div>
-          <div class="pal__body"><h3>1 · Blaze</h3><p>Negro profundo + hueso + naranja fuego. Esfuerzo, intensidad, calor del entrenamiento. Elegante y potente a la vez.</p><span class="pal__ref">Basada en tu referencia 4 (Obsidian + Blaze Orange)</span></div>
+        <button type="button" class="pal" data-set="bosque">
+          <div class="pal__sw"><div style="background:#0f2a1d;color:#f2eee8">Verde bosque<small>#0F2A1D</small></div><div style="background:#f2eee8;color:#0f2a1d">Hueso<small>#F2EEE8</small></div><div style="background:#ff5b1f;color:#0f2a1d">Naranja fuego<small>#FF5B1F</small></div></div>
+          <div class="pal__body"><h3>1 · Bosque</h3><p>Verde bosque profundo + hueso + naranja fuego. El verde dice <strong>nutrición y salud</strong>; el naranja dice <strong>energía y entrenamiento</strong>. Las dos mitades de SabFit en una paleta.</p><span class="pal__ref">Mi recomendación</span></div>
         </button>
-        <button type="button" class="pal" data-set="volt">
-          <div class="pal__sw"><div style="background:#0e0e10;color:#f4f3ff">Ónix<small>#0E0E10</small></div><div style="background:#6e3bff;color:#fff">Índigo eléctrico<small>#6E3BFF</small></div><div style="background:#7cf2c4;color:#0e0e10">Menta<small>#7CF2C4</small></div></div>
-          <div class="pal__body"><h3>2 · Volt</h3><p>Negro + índigo eléctrico + menta tropical. Moderna y diferente: casi ningún entrenador usa estos colores, te recuerdan al instante.</p><span class="pal__ref">Basada en tu referencia 2 (Onyx + Indigo + Mint)</span></div>
+        <button type="button" class="pal" data-set="lima">
+          <div class="pal__sw"><div style="background:#0b0c0c;color:#f2eee8">Obsidiana<small>#0B0C0C</small></div><div style="background:#f2eee8;color:#0b0c0c">Hueso<small>#F2EEE8</small></div><div style="background:#c2f23d;color:#0b0c0c">Verde lima<small>#C2F23D</small></div></div>
+          <div class="pal__body"><h3>2 · Lima</h3><p>Negro + hueso + verde lima eléctrico. El verde como color fuerte: fresco, vital y con mucha fuerza en Instagram.</p><span class="pal__ref">Estilo de tu referencia 4, con verde</span></div>
         </button>
-        <button type="button" class="pal" data-set="pulse">
-          <div class="pal__sw"><div style="background:#0a0f1c;color:#eef3ff">Medianoche<small>#0A0F1C</small></div><div style="background:#2f7bff;color:#fff">Azul eléctrico<small>#2F7BFF</small></div><div style="background:#ff8a5b;color:#0a0f1c">Melón<small>#FF8A5B</small></div></div>
-          <div class="pal__body"><h3>3 · Pulse</h3><p>Azul medianoche + azul eléctrico + naranja melón. Ciencia y energía: ideal si quieres resaltar la parte de nutrición y datos.</p><span class="pal__ref">Basada en tu referencia 3 (Midnight + Blue + Cantaloupe)</span></div>
+        <button type="button" class="pal" data-set="esmeralda">
+          <div class="pal__sw"><div style="background:#0d0f0e;color:#f1f5f2">Ónix<small>#0D0F0E</small></div><div style="background:#10b981;color:#05140d">Esmeralda<small>#10B981</small></div><div style="background:#ffb547;color:#0d0f0e">Mango<small>#FFB547</small></div></div>
+          <div class="pal__body"><h3>3 · Esmeralda</h3><p>Negro + verde esmeralda + mango. Verde vivo de alimento fresco, con un toque de fruta. Moderna y llamativa.</p><span class="pal__ref">Estilo de tu referencia 2, con verde</span></div>
         </button>
-        <button type="button" class="pal" data-set="sky">
-          <div class="pal__sw"><div style="background:#2c9bff;color:#fff">Cielo<small>#2C9BFF</small></div><div style="background:#f5f6f2;color:#0b1b2b">Nube<small>#F5F6F2</small></div><div style="background:#e8432e;color:#fff">Ámbar rojo<small>#E8432E</small></div></div>
-          <div class="pal__body"><h3>4 · Sky</h3><p>Azul cielo + blanco nube + rojo ámbar. Luminosa, fresca y cercana. La única clara de las cuatro.</p><span class="pal__ref">Basada en tu referencia 1 (Sky Blue + White + Amber Red)</span></div>
+        <button type="button" class="pal" data-set="matcha">
+          <div class="pal__sw"><div style="background:#f4f1ea;color:#13261b">Crema<small>#F4F1EA</small></div><div style="background:#2e5e3e;color:#ffffff">Verde matcha<small>#2E5E3E</small></div><div style="background:#ff5a36;color:#ffffff">Tomate<small>#FF5A36</small></div></div>
+          <div class="pal__body"><h3>4 · Matcha</h3><p>Crema + verde matcha + rojo tomate. La única clara: natural, cálida y cercana, como una cocina saludable.</p><span class="pal__ref">Estilo de tu referencia 1, con verde</span></div>
         </button>
       </div>
     </div>
@@ -403,11 +402,11 @@ section.block { padding: 60px 0; border-top: 1px solid #e3dfd8; }
         <h2>¿Cuál es <span class="serif">tuya?</span></h2>
         <p>Respóndeme con algo así:</p>
         <ol>
-          <li><strong>Paleta:</strong> Blaze, Volt, Pulse o Sky (o "Blaze pero con el azul de Pulse").</li>
+          <li><strong>Paleta:</strong> Bosque, Lima, Esmeralda o Matcha (o una mezcla, ej. "Bosque pero con el lima").</li>
           <li><strong>Logo:</strong> una letra de la A a la G (puedes elegir 2 y los mezclo).</li>
           <li><strong>Lo que NO te gustó</strong>, para no repetirlo.</li>
         </ol>
-        <p style="margin-top:18px;color:#bbb">Ejemplo: <code>Paleta Blaze · Logo F y G · no me gusta el azul</code></p>
+        <p style="margin-top:18px;color:#bbb">Ejemplo: <code>Paleta Bosque · Logo E y G · no me gusta el crema</code></p>
       </div>
     </div>
   </section>
@@ -421,7 +420,7 @@ section.block { padding: 60px 0; border-top: 1px solid #e3dfd8; }
       btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.set === p)); });
     }
     btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.set); }); });
-    apply(new URLSearchParams(location.search).get("paleta") || "blaze");
+    apply(new URLSearchParams(location.search).get("paleta") || "bosque");
   })();
 </script>
 </body>
