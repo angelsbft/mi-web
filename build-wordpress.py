@@ -61,7 +61,8 @@ out.write_text(
     f'<!-- SabFit: pega TODO este contenido en un bloque "HTML personalizado" -->\n'
     f"{fonts}\n{extra_head}<style>\n{css}{wp_css}</style>\n"
     f'<div class="sabfit-root alignfull">\n{body}\n</div>\n{extra_body}'
-    f"<script>\n{js}</script>\n",
+    f"<script>\n{js}</script>\n"
+    f"<!-- FIN SabFit: si ves esta línea una sola vez, el código está completo -->\n",
     encoding="utf-8",
 )
 print(f"Generado: {out}")
