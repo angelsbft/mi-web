@@ -6,6 +6,10 @@
    ========================================================= */
 const WHATSAPP_NUMBER = "573156942956";
 
+// Dirección de la hoja de Google donde se guardan las respuestas del diagnóstico
+// (la "URL de la aplicación web" de Apps Script; ver google-apps-script/encuesta.gs).
+const SURVEY_ENDPOINT = "";
+
 document.documentElement.classList.add("js");
 
 function whatsappUrl(message) {
@@ -607,6 +611,213 @@ if (quiz) {
       renderQuestion();
     }
   });
+}
+
+// Diagnóstico (encuesta de 12 preguntas) → Google Sheets + regalo de 5 hábitos
+// type: "single" (avanza solo), "multi" (hasta "max"), "scale" (1 a 10), "text" (opcional)
+const SURVEY_QUESTIONS = [
+  { key: "Edad", type: "single", question: "¿Cuántos años tienes?",
+    options: ["15 a 24", "25 a 34", "35 a 49", "50 a 59", "60 o más"] },
+  { key: "Me describe", type: "single", question: "¿Qué te describe mejor?",
+    options: ["Quiero verme mejor", "Quiero sentirme con más energía", "Soy deportista", "Tengo una condición de salud", "Busco ayuda para un familiar"] },
+  { key: "Satisfacción (1-10)", type: "scale", question: "Del 1 al 10, ¿qué tan satisfecho/a estás hoy con tu cuerpo y tu salud?",
+    low: "Nada", high: "Totalmente" },
+  { key: "Veces que lo ha dejado", type: "single", question: "¿Cuántas veces has empezado a entrenar o a comer mejor y lo has dejado?",
+    options: ["Nunca lo he dejado", "1 o 2 veces", "3 a 5 veces", "Perdí la cuenta 😅"] },
+  { key: "Lo que más frena", type: "multi", max: 2, question: "¿Qué es lo que más te ha frenado?", hint: "Elige máximo 2.",
+    options: ["No sé qué rutina hacer", "No sé qué comer", "Pierdo la motivación", "No tengo tiempo", "Me da pena ir al gimnasio", "Me lesioné o tengo molestias", "Es muy caro tener un entrenador"] },
+  { key: "Información", type: "single", question: "Cuando buscas información de ejercicio o alimentación, ¿qué te pasa?",
+    options: ["La encuentro y la aplico", "Encuentro cosas que se contradicen", "Hay tanta información que me abrumo", "No busco información"] },
+  { key: "Su historia", type: "text", question: "Cuéntame la última vez que intentaste mejorar tu físico o tu salud. ¿Qué pasó?",
+    hint: "Opcional, pero me ayuda muchísimo.", placeholder: "Ej: empecé el gimnasio en enero, a las 3 semanas lo dejé porque…" },
+  { key: "Ha usado", type: "multi", max: 6, question: "¿Qué has usado para entrenar o comer mejor?", hint: "Puedes elegir varias.",
+    options: ["Videos de YouTube o TikTok", "Apps", "Rutinas del gimnasio", "Entrenador personal", "Nutricionista", "Nada todavía"] },
+  { key: "Ha pagado", type: "single", question: "¿Has pagado alguna vez por un plan, entrenador o app?",
+    options: ["Sí, y me sirvió", "Sí, y no me sirvió", "No, nunca"] },
+  { key: "Lo más valioso", type: "single", question: "Si tuvieras a alguien que te acompañe, ¿qué sería lo más valioso?",
+    options: ["Una rutina hecha para mí", "Saber qué comer", "Que me haga seguimiento y me exija", "Que me corrija la técnica"] },
+  { key: "Modalidad", type: "single", question: "¿Cómo lo preferirías?",
+    options: ["Online", "Presencial", "Una mezcla de ambos"] },
+  { key: "Inversión mensual", type: "single", question: "¿Cuánto invertirías al mes en algo que de verdad te funcione?",
+    options: ["Menos de $50.000", "$50.000 a $100.000", "$100.000 a $150.000", "$150.000 a $250.000", "Más de $250.000"] },
+];
+
+const survey = document.getElementById("survey");
+
+if (survey) {
+  const screens = survey.querySelectorAll(".quiz__screen");
+  const sCount = document.getElementById("surveyCount");
+  const sBar = document.getElementById("surveyBar");
+  const sQuestion = document.getElementById("surveyQuestion");
+  const sHint = document.getElementById("surveyHint");
+  const sOptions = document.getElementById("surveyOptions");
+  const sNext = document.getElementById("surveyNext");
+  const sBack = survey.querySelector("[data-survey='back']");
+  const contact = document.getElementById("surveyContact");
+  const total = SURVEY_QUESTIONS.length;
+  let current = 0;
+  let answers = {};
+
+  const showScreen = (name) => screens.forEach((el) => (el.hidden = el.dataset.screen !== name));
+  const goTo = (i) => {
+    current = i;
+    if (current < total) renderQuestion();
+    else {
+      sBar.style.width = "100%";
+      showScreen("contact");
+    }
+  };
+
+  function optionButton(label, selected, onClick) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "quiz__option" + (selected ? " is-selected" : "");
+    btn.textContent = label;
+    btn.addEventListener("click", () => onClick(btn));
+    return btn;
+  }
+
+  function renderQuestion() {
+    const q = SURVEY_QUESTIONS[current];
+    showScreen("question");
+    sCount.textContent = `Pregunta ${current + 1} de ${total}`;
+    sBar.style.width = `${(current / total) * 100}%`;
+    sQuestion.textContent = q.question;
+    sHint.textContent = q.hint || "";
+    sBack.disabled = current === 0;
+    sOptions.innerHTML = "";
+    sOptions.className = "quiz__options" + (q.type === "scale" ? " quiz__options--scale" : "");
+    sNext.hidden = !(q.type === "multi" || q.type === "text");
+    const advance = () => setTimeout(() => goTo(current + 1), 250);
+
+    if (q.type === "single") {
+      q.options.forEach((opt) =>
+        sOptions.appendChild(optionButton(opt, answers[q.key] === opt, (btn) => {
+          answers[q.key] = opt;
+          sOptions.querySelectorAll(".quiz__option").forEach((b) => b.classList.remove("is-selected"));
+          btn.classList.add("is-selected");
+          advance();
+        }))
+      );
+    } else if (q.type === "scale") {
+      for (let n = 1; n <= 10; n++) {
+        sOptions.appendChild(optionButton(String(n), answers[q.key] === n, (btn) => {
+          answers[q.key] = n;
+          btn.classList.add("is-selected");
+          advance();
+        }));
+      }
+      const labels = document.createElement("div");
+      labels.className = "survey__scale-labels";
+      labels.innerHTML = "<span></span><span></span>";
+      labels.children[0].textContent = `1 · ${q.low}`;
+      labels.children[1].textContent = `${q.high} · 10`;
+      sOptions.appendChild(labels);
+    } else if (q.type === "multi") {
+      const chosen = new Set(answers[q.key] || []);
+      const sync = () => { sNext.disabled = chosen.size === 0; };
+      q.options.forEach((opt) =>
+        sOptions.appendChild(optionButton(opt, chosen.has(opt), (btn) => {
+          if (chosen.has(opt)) chosen.delete(opt);
+          else if (chosen.size < q.max) chosen.add(opt);
+          btn.classList.toggle("is-selected", chosen.has(opt));
+          answers[q.key] = [...chosen];
+          sync();
+        }))
+      );
+      sync();
+    } else if (q.type === "text") {
+      const area = document.createElement("textarea");
+      area.rows = 4;
+      area.maxLength = 600;
+      area.placeholder = q.placeholder || "";
+      area.value = answers[q.key] || "";
+      area.addEventListener("input", () => (answers[q.key] = area.value.trim()));
+      sOptions.appendChild(area);
+      sNext.disabled = false;
+    }
+    sNext.textContent = q.type === "text" && !answers[q.key] ? "Omitir" : "Siguiente";
+    if (q.type === "text") sOptions.querySelector("textarea").addEventListener("input", () => {
+      sNext.textContent = answers[q.key] ? "Siguiente" : "Omitir";
+    });
+    sQuestion.focus({ preventScroll: true });
+  }
+
+  function sendAnswers(extra) {
+    const row = {};
+    SURVEY_QUESTIONS.forEach((q) => {
+      const v = answers[q.key];
+      row[q.key] = Array.isArray(v) ? v.join(" | ") : v ?? "";
+    });
+    Object.assign(row, extra);
+    const params = new URLSearchParams(location.search);
+    row["Fuente"] = params.get("utm_source") || (document.referrer ? new URL(document.referrer).hostname : "directo");
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "survey_complete" });
+
+    if (!SURVEY_ENDPOINT) {
+      console.warn("SabFit: falta SURVEY_ENDPOINT, la respuesta no se guardó.", row);
+      return;
+    }
+    // text/plain evita el bloqueo CORS de Google; no necesitamos leer la respuesta
+    fetch(SURVEY_ENDPOINT, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ answers: row }),
+    }).catch(() => {});
+  }
+
+  contact.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const error = document.getElementById("surveyError");
+    const name = contact.elements.sName.value.trim();
+    const phone = contact.elements.sPhone.value.trim();
+    const consent = contact.elements.sConsent.checked;
+    if ((name || phone) && !consent) {
+      error.textContent = "Para dejar tus datos necesito tu autorización (o deja los campos vacíos).";
+      return;
+    }
+    error.textContent = "";
+    // Campo trampa: si un robot lo llena, no se guarda nada
+    if (!contact.elements.sWebsite.value) {
+      sendAnswers({
+        "Nombre": consent ? name : "",
+        "WhatsApp": consent ? phone : "",
+        "Autoriza contacto": consent ? "Sí" : "No",
+      });
+    }
+    try { localStorage.setItem("sf-survey-done", "1"); } catch (err) {}
+    showScreen("reward");
+    document.getElementById("surveyRewardTitle").focus({ preventScroll: true });
+    survey.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  survey.addEventListener("click", (e) => {
+    const action = e.target.closest("[data-survey]")?.dataset.survey;
+    if (action === "start") {
+      answers = {};
+      goTo(0);
+    } else if (action === "back" && current > 0) {
+      goTo(current - 1);
+    } else if (action === "next") {
+      goTo(current + 1);
+    }
+  });
+
+  // Quien ya respondió puede volver a ver sus hábitos sin repetir la encuesta
+  try {
+    if (localStorage.getItem("sf-survey-done")) {
+      const startBtn = survey.querySelector("[data-survey='start']");
+      const again = document.createElement("button");
+      again.type = "button";
+      again.className = "quiz__restart";
+      again.textContent = "Ya respondí: ver mis 5 hábitos";
+      again.addEventListener("click", () => showScreen("reward"));
+      startBtn.insertAdjacentElement("afterend", again);
+    }
+  } catch (err) {}
 }
 
 // Planes y precios: cambiar entre online y presencial

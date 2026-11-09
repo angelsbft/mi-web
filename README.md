@@ -33,3 +33,9 @@ Las preguntas, los puntajes y los perfiles están al final de `js/main.js` (`QUI
 Cada clic que abre WhatsApp envía a la capa de datos `{ event: "whatsapp_click", origen: "..." }`
 (`inicio`, `servicios`, `sobre-mi`, `contacto`, `menu`, `boton_flotante`, `formulario_contacto`, `test_<perfil>`).
 En GTM: activador de **Evento personalizado** `whatsapp_click` y variable de capa de datos `origen`.
+
+## Diagnóstico (encuesta)
+
+Las respuestas se guardan en Google Sheets mediante `google-apps-script/encuesta.gs`
+(instrucciones dentro del archivo). Pega la URL `/exec` en `SURVEY_ENDPOINT` de `js/main.js`
+y vuelve a generar la versión de WordPress. Las preguntas están en `SURVEY_QUESTIONS`.

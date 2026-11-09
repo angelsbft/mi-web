@@ -93,6 +93,13 @@
       </div>
     </div>
 
+    <!-- Invitación al diagnóstico -->
+    <a href="#diagnostico" class="promo">
+      <span class="promo__gift" aria-hidden="true">🎁</span>
+      <span>Responde el <strong>diagnóstico de 2 minutos</strong> y recibe <strong>5 hábitos fáciles que cambian tu salud</strong></span>
+      <span class="promo__go">Quiero mis 5 hábitos →</span>
+    </a>
+
     <!-- ===== Servicios ===== -->
     <section class="section" id="servicios">
       <div class="container">
@@ -527,6 +534,80 @@
             <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
             @aangelsabf
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Diagnóstico (encuesta) ===== -->
+    <section class="section survey-section" id="diagnostico">
+      <div class="container">
+        <header class="section__header reveal">
+          <span class="tag">Diagnóstico gratuito · 2 minutos</span>
+          <h2 class="section__title">Tu salud en <em class="em">2 minutos</em></h2>
+          <p class="section__text">Respóndeme 12 preguntas rápidas y te regalo 5 hábitos fáciles de hacer que tienen grandes cambios en tu energía, tu cuerpo y tu salud.</p>
+        </header>
+
+        <div class="quiz survey reveal" id="survey">
+          <!-- Inicio -->
+          <div class="quiz__screen" data-screen="start">
+            <div class="survey__gifts" aria-hidden="true">
+              <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+            </div>
+            <h3>5 hábitos que cambian tu salud</h3>
+            <p>Se desbloquean al terminar el diagnóstico. Tus respuestas son anónimas y me ayudan a crear mejores planes para personas como tú.</p>
+            <button type="button" class="btn btn--primary btn--large" data-survey="start">Empezar diagnóstico</button>
+          </div>
+
+          <!-- Preguntas (se llenan desde js/main.js) -->
+          <div class="quiz__screen" data-screen="question" hidden>
+            <div class="quiz__top">
+              <button type="button" class="quiz__back" data-survey="back" aria-label="Pregunta anterior">← Atrás</button>
+              <span class="quiz__count" id="surveyCount"></span>
+            </div>
+            <div class="quiz__progress"><span id="surveyBar"></span></div>
+            <h3 class="quiz__question" id="surveyQuestion" tabindex="-1"></h3>
+            <p class="survey__hint" id="surveyHint"></p>
+            <div class="quiz__options" id="surveyOptions"></div>
+            <button type="button" class="btn btn--primary btn--block survey__next" id="surveyNext" data-survey="next" hidden>Siguiente</button>
+          </div>
+
+          <!-- Contacto opcional -->
+          <form class="quiz__screen survey__contact" data-screen="contact" id="surveyContact" hidden novalidate>
+            <h3>¡Último paso! 🙌</h3>
+            <p>Si quieres, déjame tus datos y te escribo con una recomendación para ti. Es opcional.</p>
+            <label for="sName">Nombre (opcional)</label>
+            <input type="text" id="sName" name="sName" placeholder="Tu nombre" autocomplete="name">
+            <label for="sPhone">WhatsApp (opcional)</label>
+            <input type="tel" id="sPhone" name="sPhone" placeholder="300 123 4567" autocomplete="tel">
+            <label class="survey__consent">
+              <input type="checkbox" name="sConsent">
+              <span>Autorizo a SabFit a contactarme y a usar mis datos solo para este fin, según la Ley 1581 de 2012.</span>
+            </label>
+            <input type="text" name="sWebsite" class="survey__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <p class="form-error" id="surveyError" role="alert"></p>
+            <button type="submit" class="btn btn--wa btn--block btn--large">🎁 Ver mis 5 hábitos</button>
+          </form>
+
+          <!-- Regalo -->
+          <div class="quiz__screen survey__reward" data-screen="reward" hidden>
+            <span class="quiz__emoji" aria-hidden="true">🎁</span>
+            <h3 class="quiz__result-title" tabindex="-1" id="surveyRewardTitle">Tus 5 hábitos</h3>
+            <p>Gracias por responder. Empieza por uno solo esta semana y suma otro cada semana.</p>
+            <ol class="habits">
+              <li><strong>Un vaso de agua al despertar</strong><span>Y lleva una botella contigo todo el día. Más energía, menos antojos.</span></li>
+              <li><strong>Proteína en cada comida</strong><span>Una porción del tamaño de tu palma: huevo, pollo, pescado, carne o legumbres.</span></li>
+              <li><strong>Camina 10 minutos después de comer</strong><span>Ayuda a tu digestión y a controlar el azúcar en la sangre.</span></li>
+              <li><strong>Duerme 7 a 9 horas</strong><span>Acuéstate a la misma hora todos los días: tu cuerpo se recupera mientras duermes.</span></li>
+              <li><strong>2 sesiones de fuerza por semana</strong><span>20 minutos bastan para proteger tus músculos, tus huesos y tu metabolismo.</span></li>
+            </ol>
+            <div class="survey__cta">
+              <a href="#" class="btn btn--wa btn--block" data-wa="¡Hola Ángel! 👋 Hice el diagnóstico de SabFit y quiero agendar mi *primera reunión online gratis*.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                Agenda tu reunión online gratis
+              </a>
+              <a href="#test" class="btn btn--ghost btn--block">Descubre qué plan es para ti</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
