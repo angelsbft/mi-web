@@ -8,7 +8,7 @@ const WHATSAPP_NUMBER = "573156942956";
 
 // Dirección de la hoja de Google donde se guardan las respuestas del diagnóstico
 // (la "URL de la aplicación web" de Apps Script; ver google-apps-script/encuesta.gs).
-const SURVEY_ENDPOINT = "";
+const SURVEY_ENDPOINT = "https://script.google.com/macros/s/AKfycbyumyJ24qvV9qNXKTirsZCU0SK6QYv69T2wM3AgoMKiAK1b-nuWkomeWuVuohBThnA/exec";
 
 document.documentElement.classList.add("js");
 
