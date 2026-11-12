@@ -1200,3 +1200,6 @@ p { margin: 0 0 1em; }
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* Enlaces dentro de textos */
+.survey__consent a, .faq__item p a { color: var(--primary); text-decoration: underline; }

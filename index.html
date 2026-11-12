@@ -581,7 +581,7 @@
             <input type="tel" id="sPhone" name="sPhone" placeholder="300 123 4567" autocomplete="tel">
             <label class="survey__consent">
               <input type="checkbox" name="sConsent">
-              <span>Autorizo a SabFit a contactarme y a usar mis datos solo para este fin, según la Ley 1581 de 2012.</span>
+              <span>Autorizo a SabFit a contactarme y a usar mis datos solo para este fin, según la Ley 1581 de 2012 y la <a href="https://sabfit.online/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a>.</span>
             </label>
             <input type="text" name="sWebsite" class="survey__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <p class="form-error" id="surveyError" role="alert"></p>
@@ -718,10 +718,34 @@
         <a href="https://www.instagram.com/aangelsabf/" class="footer__link footer__ig" target="_blank" rel="noopener" aria-label="Instagram de Ángel Sabata" data-ig>
           <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg> @aangelsabf
         </a>
-        <a href="https://sabfit.online" class="footer__link">sabfit.online</a>
+        <a href="https://sabfit.online/politica-de-privacidad/" class="footer__link">Política de privacidad</a>
       </div>
     </div>
   </footer>
+
+  <!-- Ficha de identidad para Google: quién es SabFit y quién está detrás -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "SabFit",
+    "alternateName": "SabFit · Ángel Sabata",
+    "url": "https://sabfit.online/",
+    "description": "Entrenamiento personal, hipertrofia y orientación nutricional en Bogotá y online, con Ángel Sabata.",
+    "telephone": "+57 315 694 2956",
+    "priceRange": "$$",
+    "areaServed": ["Bogotá", "Colombia"],
+    "address": { "@type": "PostalAddress", "addressLocality": "Bogotá", "addressCountry": "CO" },
+    "sameAs": ["https://www.instagram.com/aangelsabf/"],
+    "founder": {
+      "@type": "Person",
+      "name": "Ángel Daniel Sabata",
+      "jobTitle": "Entrenador personal",
+      "sameAs": ["https://www.instagram.com/aangelsabf/"],
+      "alumniOf": "ECEP · Escuela de entrenadores personales (Bogotá)"
+    }
+  }
+  </script>
 
   <!-- Botón flotante de WhatsApp -->
   <a href="#" class="wa-float" data-wa="¡Hola Ángel! 👋 Vengo de la página de SabFit y quiero más información sobre tus planes.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: " aria-label="Escribir por WhatsApp">
