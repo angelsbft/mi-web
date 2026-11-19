@@ -35,10 +35,10 @@
       </button>
 
       <nav class="nav" id="nav">
-        <a href="#precios" class="nav__link">Precios</a>
         <a href="#servicios" class="nav__link">Servicios</a>
+        <a href="#precios" class="nav__link">Precios</a>
         <a href="#empezar" class="nav__link">Empezar</a>
-        <a href="#test" class="nav__link">Test</a>
+        <a href="#diagnostico" class="nav__link">Diagnóstico</a>
         <a href="#sobre-mi" class="nav__link">Sobre mí</a>
         <a href="#contacto" class="nav__link">Contacto</a>
         <a href="#" class="btn btn--small btn--wa" data-wa="¡Hola Ángel! 👋 Vengo de la página de SabFit y quiero más información sobre tus planes.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
@@ -65,16 +65,13 @@
             <span class="hero__line">Entrena con <em class="em">propósito.</em></span>
             <span class="hero__line">Come con <em class="em">sentido.</em></span>
           </h1>
-          <p class="hero__text">
-            Hipertrofia, hábitos y orientación nutricional basados en ciencia, con seguimiento
-            cercano por WhatsApp. Sin dietas extremas, sin fórmulas genéricas.
-          </p>
+          <p class="hero__text">Hipertrofia, hábitos y orientación nutricional basados en ciencia, con seguimiento cercano.</p>
           <div class="hero__actions">
             <a href="#" class="btn btn--wa" data-wa="¡Hola Ángel! 👋 Quiero agendar mi *evaluación inicial* en SabFit.&#10;&#10;Mi nombre es: &#10;Prefiero que sea (presencial u online): &#10;Mi objetivo es: ">
               <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
               Agenda tu evaluación
             </a>
-            <a href="#test" class="btn btn--light">Haz el test gratis →</a>
+            <a href="#diagnostico" class="btn btn--light" data-open-survey>Diagnóstico gratis →</a>
           </div>
           <ul class="hero__stats">
             <li><strong>ECEP</strong><span>Entrenador certificado</span></li>
@@ -94,7 +91,7 @@
     </div>
 
     <!-- Invitación al diagnóstico -->
-    <a href="#diagnostico" class="promo">
+    <a href="#diagnostico" class="promo" data-open-survey>
       <span class="promo__gift" aria-hidden="true">🎁</span>
       <span>Responde el <strong>diagnóstico de 2 minutos</strong> y recibe <strong>5 hábitos fáciles que cambian tu salud</strong></span>
       <span class="promo__go">Quiero mis 5 hábitos →</span>
@@ -147,6 +144,7 @@
             <a href="#" class="card__link" data-wa="¡Hola Ángel! 👋 Me interesa el *Entrenamiento personal* de SabFit. ¿Me cuentas cómo funciona y cuál es el valor?&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Consultar →</a>
           </article>
         </div>
+        <p class="swipe-hint" aria-hidden="true">Desliza para ver más →</p>
 
         <!-- Programas especiales -->
         <div class="programs">
@@ -177,6 +175,7 @@
               <span class="program__link">Consultar →</span>
             </a>
           </div>
+          <p class="swipe-hint" aria-hidden="true">Desliza para ver más →</p>
         </div>
       </div>
     </section>
@@ -232,6 +231,7 @@
             <a href="#" class="btn btn--ghost btn--block" data-wa="¡Hola Ángel! 👋 Quiero el plan *Orientación nutricional* ($70.000/mes).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir plan</a>
           </article>
         </div>
+        <p class="swipe-hint" data-hint-for="online" aria-hidden="true">Desliza para ver más →</p>
 
         <div class="prices" data-price-panel="presencial" hidden>
           <article class="price reveal">
@@ -268,6 +268,7 @@
             <a href="#" class="btn btn--ghost btn--block" data-wa="¡Hola Ángel! 👋 Quiero el *Paquete de 12 sesiones* presenciales ($450.000).&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">Elegir paquete</a>
           </article>
         </div>
+        <p class="swipe-hint" data-hint-for="presencial" aria-hidden="true">Desliza para ver más →</p>
 
         <ul class="price-extras reveal">
           <li><strong>Evaluación presencial</strong><span>$60.000</span></li>
@@ -300,8 +301,10 @@
                 <p class="visit__meta">Aprox. 1 hora · Bogotá</p>
               </div>
             </div>
-            <p>Medimos tu punto de partida real para diseñar un plan con datos, no con suposiciones.</p>
-            <ul class="visit__list">
+            <p>Medimos tu punto de partida real para diseñar tu plan con datos.</p>
+            <details class="visit__more">
+              <summary>Ver qué incluye</summary>
+              <ul class="visit__list">
               <li><strong>Mediciones corporales:</strong> peso, perímetros y composición corporal estimada.</li>
               <li><strong>Test de estilo de vida:</strong> sueño, estrés, alimentación, horarios y actividad diaria.</li>
               <li><strong>Historial de salud:</strong> lesiones, molestias y condiciones a tener en cuenta.</li>
@@ -309,6 +312,7 @@
               <li><strong>Fotos de progreso</strong> (opcionales y privadas).</li>
               <li><strong>Objetivos claros</strong> y la ruta para lograrlos.</li>
             </ul>
+            </details>
             <p class="visit__price">💲 Tiene un costo de <strong>$60.000</strong> porque incluye mediciones y una valoración completa.</p>
             <a href="#agendar" class="btn btn--primary btn--block" data-book="presencial">Agendar evaluación presencial</a>
           </article>
@@ -321,17 +325,21 @@
                 <p class="visit__meta">20 minutos · Videollamada · Sin costo</p>
               </div>
             </div>
-            <p>Ideal si vives lejos o prefieres trabajar 100% online. Conversamos y vemos si somos el equipo ideal.</p>
-            <ul class="visit__list">
+            <p>Conversamos 20 minutos y vemos si somos el equipo ideal.</p>
+            <details class="visit__more">
+              <summary>Ver qué incluye</summary>
+              <ul class="visit__list">
               <li><strong>Videollamada</strong> por Google Meet o WhatsApp.</li>
               <li><strong>Cuestionario previo</strong> de estilo de vida y salud que te envío antes.</li>
               <li><strong>Guía para medirte en casa</strong> con cinta métrica y fotos.</li>
               <li><strong>Propuesta de plan</strong> según tu objetivo y tu tiempo disponible.</li>
             </ul>
+            </details>
             <p class="visit__price">🎁 La primera reunión online es <strong>gratis</strong> y sin compromiso.</p>
             <a href="#agendar" class="btn btn--ghost btn--block" data-book="online">Agendar reunión online</a>
           </article>
         </div>
+        <p class="swipe-hint" aria-hidden="true">Desliza para ver más →</p>
 
         <!-- Proceso -->
         <div class="steps">
@@ -358,6 +366,7 @@
               <p>Cada 4 semanas medimos de nuevo y ajustamos el plan.</p>
             </li>
           </ol>
+          <p class="swipe-hint" aria-hidden="true">Desliza para ver más →</p>
         </div>
 
         <!-- Agendar -->
@@ -403,57 +412,6 @@
       </div>
     </section>
 
-    <!-- ===== Test ===== -->
-    <section class="section quiz-section" id="test">
-      <div class="container">
-        <header class="section__header reveal">
-          <span class="tag">Test gratuito · 1 minuto</span>
-          <h2 class="section__title">¿Qué plan es <em class="em">para ti?</em></h2>
-          <p class="section__text">Cuéntame qué buscas, responde unas preguntas rápidas y descubre tu perfil, el plan que más te conviene y consejos para empezar hoy.</p>
-        </header>
-
-        <div class="quiz reveal" id="quiz">
-          <!-- Pantalla de inicio -->
-          <div class="quiz__screen" data-screen="start">
-            <div class="quiz__intro-icon"><svg class="icon" aria-hidden="true"><use href="#i-spark"/></svg></div>
-            <h3>Descubre tu perfil SabFit</h3>
-            <p>No hay respuestas buenas ni malas: responde con lo que vives hoy.</p>
-            <button type="button" class="btn btn--primary btn--large" data-action="start">Comenzar test</button>
-          </div>
-
-          <!-- Preguntas (se llenan desde js/main.js) -->
-          <div class="quiz__screen" data-screen="question" hidden>
-            <div class="quiz__top">
-              <button type="button" class="quiz__back" data-action="back" aria-label="Pregunta anterior">← Atrás</button>
-              <span class="quiz__count" id="quizCount"></span>
-            </div>
-            <div class="quiz__progress"><span id="quizBar"></span></div>
-            <h3 class="quiz__question" id="quizQuestion" tabindex="-1"></h3>
-            <div class="quiz__options" id="quizOptions"></div>
-          </div>
-
-          <!-- Resultado -->
-          <div class="quiz__screen quiz__result" data-screen="result" hidden>
-            <span class="quiz__emoji" id="resultEmoji" aria-hidden="true"></span>
-            <p class="quiz__result-label">Tu perfil es</p>
-            <h3 class="quiz__result-title" id="resultTitle" tabindex="-1"></h3>
-            <p id="resultText"></p>
-            <div class="quiz__plan">
-              <span>Plan recomendado</span>
-              <strong id="resultPlan"></strong>
-            </div>
-            <h4>Consejos para empezar hoy</h4>
-            <ul class="quiz__tips" id="resultTips"></ul>
-            <a href="#" class="btn btn--wa btn--block btn--large" id="resultWa" target="_blank" rel="noopener">
-              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-              Enviar mi resultado por WhatsApp
-            </a>
-            <button type="button" class="quiz__restart" data-action="restart">Repetir el test</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ===== Sobre mí ===== -->
     <section class="section section--alt" id="sobre-mi">
       <div class="container about">
@@ -475,65 +433,49 @@
           <span class="tag">Sobre mí</span>
           <h2 class="section__title">Hola, soy <em class="em">Ángel</em> Sabata</h2>
           <p class="about__role">Entrenador personal · Estudiante de Nutrición y Dietética</p>
-          <p>
-            Tengo 20 años y el entrenamiento es mi pasión y mi profesión. Me formé como
-            entrenador personal en la <strong>ECEP (Bogotá, Colombia)</strong>, una de las escuelas
-            con mayor trayectoria en la formación de entrenadores personales del país, donde me
-            especialicé en <strong>hipertrofia</strong>: ganar masa muscular de forma segura y
-            efectiva en personas de distintas edades y condiciones de salud.
-          </p>
-          <p>
-            Hoy curso <strong>Nutrición y Dietética en la Pontificia Universidad Javeriana</strong>,
-            lo que me permite unir entrenamiento y alimentación con bases científicas. Ya cuento con
-            experiencia acompañando a personas reales con objetivos reales, y creé SabFit para
-            ofrecerte un plan hecho a tu medida, sin fórmulas genéricas.
-          </p>
-
-          <div class="credentials">
-            <div class="credential">
-              <span class="credential__icon"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg></span>
-              <div>
-                <strong>ECEP · Bogotá</strong>
-                <span>Entrenador personal certificado, especialista en hipertrofia</span>
-              </div>
-            </div>
-            <div class="credential">
-              <span class="credential__icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
-              <div>
-                <strong>Pontificia Universidad Javeriana</strong>
-                <span>Nutrición y Dietética (en curso)</span>
-              </div>
-            </div>
-            <div class="credential">
-              <span class="credential__icon"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></span>
-              <div>
-                <strong>Experiencia práctica</strong>
-                <span>Personas de distintas edades, niveles y estados de salud</span>
-              </div>
-            </div>
-          </div>
-
-          <h3 class="about__subtitle">Mi forma de trabajar</h3>
-          <ul class="about__list">
-            <li><svg class="icon"><use href="#i-check"/></svg> <span><strong>Basado en ciencia:</strong> nada de modas ni dietas milagro.</span></li>
-            <li><svg class="icon"><use href="#i-check"/></svg> <span><strong>100% personalizado:</strong> tu cuerpo, tu rutina, tus gustos.</span></li>
-            <li><svg class="icon"><use href="#i-check"/></svg> <span><strong>Acompañamiento cercano:</strong> estoy contigo en cada paso por WhatsApp.</span></li>
+          <p>Te ayudo a ganar fuerza, cuidar tu salud y crear hábitos que te duren toda la vida, con un plan hecho para ti.</p>
+          <ul class="about__chips">
+            <li>🎓 Certificado ECEP</li>
+            <li>💪 Experto en hipertrofia</li>
+            <li>📚 Nutrición · Javeriana</li>
           </ul>
 
-          <blockquote class="about__quote">
-            “Mi objetivo no es que sigas una rutina por un mes, sino que construyas un cuerpo
-            y unos hábitos que te duren toda la vida.”
-            <cite>— Ángel Sabata</cite>
-          </blockquote>
+          <details class="about__more">
+            <summary><span>Conoce mi historia</span></summary>
+            <div class="about__more-body">
+              <p>
+                Tengo 20 años y el entrenamiento es mi pasión y mi profesión. Me formé como entrenador
+                personal en la <strong>ECEP (Bogotá)</strong>, donde me especialicé en <strong>hipertrofia</strong>:
+                ganar masa muscular de forma segura en personas de distintas edades y condiciones de salud.
+              </p>
+              <p>
+                Hoy curso <strong>Nutrición y Dietética en la Pontificia Universidad Javeriana</strong>, lo que me
+                permite unir entrenamiento y alimentación con bases científicas.
+              </p>
+              <h3 class="about__subtitle">Mi forma de trabajar</h3>
+              <ul class="about__list">
+                <li><svg class="icon"><use href="#i-check"/></svg> <span><strong>Basado en ciencia:</strong> nada de modas ni dietas milagro.</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg> <span><strong>100% personalizado:</strong> tu cuerpo, tu rutina, tus gustos.</span></li>
+                <li><svg class="icon"><use href="#i-check"/></svg> <span><strong>Acompañamiento cercano:</strong> estoy contigo en cada paso por WhatsApp.</span></li>
+              </ul>
+              <blockquote class="about__quote">
+                “Mi objetivo no es que sigas una rutina por un mes, sino que construyas un cuerpo
+                y unos hábitos que te duren toda la vida.”
+                <cite>— Ángel Sabata</cite>
+              </blockquote>
+            </div>
+          </details>
 
-          <a href="#" class="btn btn--wa" data-wa="¡Hola Ángel! 💪 Vi tu perfil en SabFit y quiero entrenar contigo.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
-            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-            Entrena conmigo
-          </a>
-          <a href="https://www.instagram.com/aangelsabf/" class="btn btn--ghost btn--ig" target="_blank" rel="noopener" data-ig>
-            <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
-            @aangelsabf
-          </a>
+          <div class="about__actions">
+            <a href="#" class="btn btn--wa" data-wa="¡Hola Ángel! 💪 Vi tu perfil en SabFit y quiero entrenar contigo.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              Entrena conmigo
+            </a>
+            <a href="https://www.instagram.com/aangelsabf/" class="btn btn--ghost" target="_blank" rel="noopener" data-ig>
+              <svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg>
+              @aangelsabf
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -544,17 +486,18 @@
         <header class="section__header reveal">
           <span class="tag">Diagnóstico gratuito · 2 minutos</span>
           <h2 class="section__title">Tu salud en <em class="em">2 minutos</em></h2>
-          <p class="section__text">Respóndeme 12 preguntas rápidas y te regalo 5 hábitos fáciles de hacer que tienen grandes cambios en tu energía, tu cuerpo y tu salud.</p>
+          <p class="section__text section__text--keep">12 preguntas rápidas y te regalo <strong>5 hábitos hechos para tu objetivo</strong> y el plan que más te conviene.</p>
         </header>
 
-        <div class="quiz survey reveal" id="survey">
+        <div class="quiz survey reveal" id="survey" role="region" aria-label="Diagnóstico SabFit">
+          <button type="button" class="focus-close" data-survey="close" aria-label="Cerrar diagnóstico">✕</button>
           <!-- Inicio -->
           <div class="quiz__screen" data-screen="start">
             <div class="survey__gifts" aria-hidden="true">
               <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
             </div>
-            <h3>5 hábitos que cambian tu salud</h3>
-            <p>Se desbloquean al terminar el diagnóstico. Tus respuestas son anónimas y me ayudan a crear mejores planes para personas como tú.</p>
+            <h3>5 hábitos para tu objetivo</h3>
+            <p>Se desbloquean al terminar. Son distintos según lo que buscas: bajar grasa, ganar músculo, rendir en tu deporte, cuidar tu salud…</p>
             <button type="button" class="btn btn--primary btn--large" data-survey="start">Empezar diagnóstico</button>
           </div>
 
@@ -571,16 +514,16 @@
             <button type="button" class="btn btn--primary btn--block survey__next" id="surveyNext" data-survey="next" hidden>Siguiente</button>
           </div>
 
-          <!-- Contacto opcional -->
+          <!-- Datos (obligatorios para desbloquear el regalo) -->
           <form class="quiz__screen survey__contact" data-screen="contact" id="surveyContact" hidden novalidate>
-            <h3>¡Último paso! 🙌</h3>
-            <p>Si quieres, déjame tus datos y te escribo con una recomendación para ti. Es opcional.</p>
-            <label for="sName">Nombre (opcional)</label>
-            <input type="text" id="sName" name="sName" placeholder="Tu nombre" autocomplete="name">
-            <label for="sPhone">WhatsApp (opcional)</label>
-            <input type="tel" id="sPhone" name="sPhone" placeholder="300 123 4567" autocomplete="tel">
+            <h3>¡Listo! Tus hábitos están a un paso 🎁</h3>
+            <p>Déjame tus datos para desbloquearlos. Te escribo solo si tengo una recomendación para ti.</p>
+            <label for="sName">Nombre</label>
+            <input type="text" id="sName" name="sName" placeholder="Tu nombre" autocomplete="name" required>
+            <label for="sPhone">WhatsApp</label>
+            <input type="tel" id="sPhone" name="sPhone" placeholder="300 123 4567" autocomplete="tel" inputmode="tel" required>
             <label class="survey__consent">
-              <input type="checkbox" name="sConsent">
+              <input type="checkbox" name="sConsent" required>
               <span>Autorizo a SabFit a contactarme y a usar mis datos solo para este fin, según la Ley 1581 de 2012 y la <a href="https://sabfit.online/politica-de-privacidad/" target="_blank" rel="noopener">política de privacidad</a>.</span>
             </label>
             <input type="text" name="sWebsite" class="survey__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -588,24 +531,23 @@
             <button type="submit" class="btn btn--wa btn--block btn--large">🎁 Ver mis 5 hábitos</button>
           </form>
 
-          <!-- Regalo -->
+          <!-- Regalo: se llena según el perfil (js/main.js) -->
           <div class="quiz__screen survey__reward" data-screen="reward" hidden>
-            <span class="quiz__emoji" aria-hidden="true">🎁</span>
-            <h3 class="quiz__result-title" tabindex="-1" id="surveyRewardTitle">Tus 5 hábitos</h3>
-            <p>Gracias por responder. Empieza por uno solo esta semana y suma otro cada semana.</p>
-            <ol class="habits">
-              <li><strong>Un vaso de agua al despertar</strong><span>Y lleva una botella contigo todo el día. Más energía, menos antojos.</span></li>
-              <li><strong>Proteína en cada comida</strong><span>Una porción del tamaño de tu palma: huevo, pollo, pescado, carne o legumbres.</span></li>
-              <li><strong>Camina 10 minutos después de comer</strong><span>Ayuda a tu digestión y a controlar el azúcar en la sangre.</span></li>
-              <li><strong>Duerme 7 a 9 horas</strong><span>Acuéstate a la misma hora todos los días: tu cuerpo se recupera mientras duermes.</span></li>
-              <li><strong>2 sesiones de fuerza por semana</strong><span>20 minutos bastan para proteger tus músculos, tus huesos y tu metabolismo.</span></li>
-            </ol>
+            <span class="quiz__emoji" id="rewardEmoji" aria-hidden="true">🎁</span>
+            <p class="quiz__result-label">Tus 5 hábitos para</p>
+            <h3 class="quiz__result-title" tabindex="-1" id="surveyRewardTitle"></h3>
+            <p>Empieza por uno solo esta semana y suma otro cada semana.</p>
+            <ol class="habits" id="rewardHabits"></ol>
+            <div class="quiz__plan">
+              <span>Plan recomendado para ti</span>
+              <strong id="rewardPlan"></strong>
+            </div>
             <div class="survey__cta">
-              <a href="#" class="btn btn--wa btn--block" data-wa="¡Hola Ángel! 👋 Hice el diagnóstico de SabFit y quiero agendar mi *primera reunión online gratis*.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
+              <a href="#" class="btn btn--wa btn--block" id="rewardWa" target="_blank" rel="noopener">
                 <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
                 Agenda tu reunión online gratis
               </a>
-              <a href="#test" class="btn btn--ghost btn--block">Descubre qué plan es para ti</a>
+              <button type="button" class="btn btn--ghost btn--block" data-survey="close">Volver a la página</button>
             </div>
           </div>
         </div>
@@ -659,11 +601,11 @@
 
     <!-- ===== Contacto ===== -->
     <section class="section contact" id="contacto">
-      <div class="container contact__inner">
+      <div class="container contact__inner contact__inner--single">
         <div class="contact__info reveal">
           <span class="tag tag--light">Contacto</span>
           <h2 class="section__title">¿Listo para <em class="em">empezar?</em></h2>
-          <p>Escríbeme por WhatsApp y te respondo a la brevedad. La primera conversación es sin compromiso.</p>
+          <p>Escríbeme por WhatsApp. La primera conversación es sin compromiso.</p>
           <a href="#" class="btn btn--wa btn--large" data-wa="¡Hola Ángel! 👋 Vengo de la página de SabFit y quiero más información sobre tus planes.&#10;&#10;Mi nombre es: &#10;Mi objetivo es: ">
             <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
             Escribir por WhatsApp
@@ -674,34 +616,6 @@
           </a>
         </div>
 
-        <form class="contact__form reveal" id="contactForm" novalidate>
-          <h3>O déjame tus datos</h3>
-          <p class="contact__form-note">Se abrirá WhatsApp con tu mensaje listo para enviar.</p>
-
-          <label for="name">Nombre</label>
-          <input type="text" id="name" name="name" placeholder="Tu nombre" autocomplete="name" required>
-
-          <label for="goal">¿Qué te interesa?</label>
-          <select id="goal" name="goal">
-            <option>Orientación nutricional</option>
-            <option selected>Entrenamiento + Orientación nutricional</option>
-            <option>Entrenamiento personal</option>
-            <option>Programa Adulto mayor 60+</option>
-            <option>Programa Deportistas</option>
-            <option>Programa Salud y movimiento</option>
-            <option>Consultoría puntual</option>
-            <option>Tengo otra consulta</option>
-          </select>
-
-          <label for="message">Cuéntame tu objetivo</label>
-          <textarea id="message" name="message" rows="4" placeholder="Ej: quiero bajar 5 kg y tener más energía"></textarea>
-
-          <p class="form-error" id="formError" role="alert"></p>
-          <button type="submit" class="btn btn--wa btn--block">
-            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
-            Enviar por WhatsApp
-          </button>
-        </form>
       </div>
     </section>
   </main>

@@ -1203,3 +1203,161 @@ p { margin: 0 0 1em; }
 
 /* Enlaces dentro de textos */
 .survey__consent a, .faq__item p a { color: var(--primary); text-decoration: underline; }
+
+/* =========================================================
+   Página más corta y dinámica
+   ========================================================= */
+
+/* Modo enfoque del diagnóstico: ocupa toda la pantalla */
+.focus-close { display: none; }
+.sf-lock, .sf-lock body { overflow: hidden; }
+.quiz.is-focus {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 72px 20px 40px;
+  background: var(--bg);
+  transform: none;
+  opacity: 1;
+  transition: none;
+}
+.quiz.is-focus > .quiz__screen { max-width: 680px; margin: 0 auto; }
+.quiz.is-focus .focus-close {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--bone);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+/* Sobre mí: presentación corta + historia plegable */
+.about__chips { list-style: none; padding: 0; margin: 0 0 1.2rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+.about__chips li {
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: .88rem;
+  font-weight: 600;
+}
+.about__more { margin: 0 0 1.6rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.about__more summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  list-style: none;
+}
+.about__more summary::-webkit-details-marker { display: none; }
+.about__more summary::after {
+  content: "+";
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--bone);
+  font-size: 1.2rem;
+  transition: transform .3s;
+}
+.about__more[open] summary::after { transform: rotate(45deg); }
+.about__more[open] summary span::after { content: " ↑"; }
+.about__more-body { padding-bottom: 1rem; animation: heroIn .5s cubic-bezier(.22, 1, .36, 1) both; }
+.about__actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+
+/* Primera cita: "Ver qué incluye" */
+.visit__more { margin: 0 0 1.2rem; flex-grow: 1; }
+.visit__more summary { font-weight: 600; color: var(--primary); cursor: pointer; padding: .3rem 0 .8rem; }
+.visit__more[open] .visit__list { animation: heroIn .4s ease both; }
+.visit__more .visit__list { margin-bottom: 0; }
+
+/* Contacto en una sola columna */
+.contact__inner--single { grid-template-columns: 1fr; max-width: 640px; text-align: center; }
+.contact__inner--single .contact__ig { margin-left: auto; margin-right: auto; }
+
+/* Aviso "desliza" (solo en celular) */
+.swipe-hint { display: none; }
+
+@media (max-width: 760px) {
+  .section { padding: 56px 0; }
+  .section__header { margin-bottom: 2rem; }
+  .section__text { font-size: 1rem; }
+  .hero__photo { height: 52vh; min-height: 320px; }
+  .programs { margin-top: 3rem; }
+  .steps { margin-top: 3rem; }
+
+  /* Tarjetas que se deslizan de lado en vez de apilarse */
+  .cards, .programs__grid, .prices, .steps__list {
+    display: flex;
+    gap: 1rem;
+    max-width: none;
+    margin: 0 -20px;
+    padding: 18px 20px 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px;
+    scrollbar-width: none;
+  }
+  .cards::-webkit-scrollbar, .programs__grid::-webkit-scrollbar,
+  .prices::-webkit-scrollbar, .steps__list::-webkit-scrollbar { display: none; }
+  .cards > *, .programs__grid > *, .prices > *, .steps__list > * {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+  .steps__list > * { flex-basis: 70%; padding: 1.2rem 1rem; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); }
+  .swipe-hint {
+    display: block;
+    margin: .6rem 0 0;
+    text-align: right;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--muted);
+    animation: nudge 2s ease-in-out infinite;
+  }
+  .prices[hidden] + .swipe-hint { display: none; }
+  .price-extras { grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .price-extras li { padding: .8rem; }
+  .quiz.is-focus { padding: 64px 16px 32px; }
+
+  /* Menos alto en celular */
+  .section__text:not(.section__text--keep) { display: none; }
+  .visits {
+    display: flex;
+    gap: 1rem;
+    max-width: none;
+    margin: 0 -20px;
+    padding: 18px 20px 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 20px;
+    scrollbar-width: none;
+  }
+  .visits::-webkit-scrollbar { display: none; }
+  .visits > * { flex: 0 0 86%; scroll-snap-align: start; }
+  .card, .visit, .price { padding: 1.5rem 1.3rem; }
+  .card__icon { width: 46px; height: 46px; margin-bottom: .9rem; }
+  .card__list, .price__list { margin-bottom: 1.2rem; }
+  .about__photo { max-width: 260px; }
+  .booking__grid { grid-template-columns: 1fr 1fr; gap: 0 .7rem; }
+  .booking__grid > div:first-child { grid-column: 1 / -1; }
+}
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-6px); } }
