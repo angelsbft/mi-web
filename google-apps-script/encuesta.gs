@@ -80,6 +80,8 @@ function doPost(e) {
     const col = headers.indexOf("Escribir");
     if (link && col !== -1) sheet.getRange(sheet.getLastRow(), col + 1).setRichTextValue(link);
 
+    try { updatePanelValues_(); } catch (err) {} // el panel nunca debe impedir guardar la respuesta
+
     return ContentService.createTextOutput(JSON.stringify({ ok: true }))
       .setMimeType(ContentService.MimeType.JSON);
   } finally {
@@ -166,8 +168,9 @@ function formatSheet_(sheet, currentCount) {
 }
 
 // ---------------------------------------------------------------------------
-// Panel de gráficas: tablas con fórmulas (se actualizan solas con cada respuesta)
-// y una gráfica por pregunta. "contains" cuenta respuestas de selección múltiple.
+// Panel de gráficas: una tabla y una gráfica por pregunta. Los números los calcula
+// el código (no fórmulas) y se actualizan con cada respuesta nueva.
+// "contains" cuenta respuestas de selección múltiple.
 // ---------------------------------------------------------------------------
 const PANEL_NAME = "Panel";
 const PANEL_COLORS = ["#2f6b4a", "#ff5b1f", "#8fd18a", "#0f2a1d", "#ffb547", "#5d6a61", "#c9d8cc", "#ff9a73"];
@@ -193,26 +196,61 @@ const PANEL_BLOCKS = [
     options: ["instagram", "instagram_bio", "amigos", "directo"] },
 ];
 
-function colLetter_(n) {
-  let s = "";
-  while (n > 0) {
-    const m = (n - 1) % 26;
-    s = String.fromCharCode(65 + m) + s;
-    n = Math.floor((n - 1) / 26);
-  }
-  return s;
+// Posición de cada bloque en el Panel (la misma al crearlo y al actualizarlo)
+function panelLayout_(headers) {
+  const layout = [];
+  let row = 10;
+  PANEL_BLOCKS.forEach(function (block) {
+    const col = headers.indexOf(block.column);
+    if (col === -1) return;
+    layout.push({ block: block, col: col, row: row });
+    row += Math.max(block.options.length + 3, 17);
+  });
+  return layout;
+}
+
+// Calcula los números con el código (sin fórmulas: funciona en cualquier idioma de Sheets)
+function updatePanelValues_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const panel = ss.getSheetByName(PANEL_NAME);
+  if (!panel) return;
+  const data = getSheet_().getDataRange().getValues();
+  const headers = data[0].map(String);
+  const rows = data.slice(1).filter(function (r) { return r[headers.indexOf("Fecha")] !== ""; });
+  const colValues = function (name) {
+    const i = headers.indexOf(name);
+    return i === -1 ? [] : rows.map(function (r) { return String(r[i]).trim(); }).filter(function (v) { return v !== ""; });
+  };
+
+  const scores = colValues("Cerca del objetivo (1-10)").map(Number).filter(function (n) { return !isNaN(n); });
+  const inv = colValues("Inversión mensual");
+  const high = inv.filter(function (v) {
+    return ["$100.000 a $150.000", "$150.000 a $250.000", "Más de $250.000"].indexOf(v) !== -1;
+  }).length;
+  panel.getRange(4, 2, 4, 1).setValues([
+    [rows.length],
+    [colValues("WhatsApp").length],
+    [scores.length ? Math.round(scores.reduce(function (a, b) { return a + b; }, 0) / scores.length * 10) / 10 : "-"],
+    [inv.length ? high / inv.length : "-"],
+  ]);
+
+  panelLayout_(headers).forEach(function (item) {
+    const values = rows.map(function (r) { return String(r[item.col]); });
+    const counts = item.block.options.map(function (opt) {
+      return values.filter(function (v) {
+        return item.block.contains ? v.split(" | ").indexOf(opt) !== -1 : v === opt;
+      }).length;
+    });
+    const total = counts.reduce(function (a, b) { return a + b; }, 0);
+    panel.getRange(item.row + 1, 2, counts.length, 2).setValues(counts.map(function (c) {
+      return [c, total ? c / total : 0];
+    }));
+  });
 }
 
 function crearPanel() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-  const data = getSheet_();
-  const headers = headersOf_(data);
-  const ref = function (name) {
-    const i = headers.indexOf(name);
-    if (i === -1) return null;
-    const L = colLetter_(i + 1);
-    return "'" + SHEET_NAME + "'!" + L + "2:" + L;
-  };
+  const headers = headersOf_(getSheet_());
 
   let panel = ss.getSheetByName(PANEL_NAME);
   if (!panel) panel = ss.insertSheet(PANEL_NAME, 0);
@@ -228,40 +266,22 @@ function crearPanel() {
   panel.getRange("A2").setValue("Se actualiza solo con cada respuesta nueva.").setFontColor("#5d6a61");
 
   // Indicadores principales
-  const inv = ref("Inversión mensual");
-  const kpis = [
-    ["Respuestas", "=COUNTA(" + ref("Fecha") + ")"],
-    ["Con WhatsApp", "=COUNTA(" + ref("WhatsApp") + ")"],
-    ["Promedio «qué tan cerca están» (1-10)", ref("Cerca del objetivo (1-10)") ?
-      "=IFERROR(ROUND(AVERAGE(" + ref("Cerca del objetivo (1-10)") + "),1),\"-\")" : "-"],
-    ["Pagarían $100.000 o más al mes", inv ?
-      "=IFERROR((COUNTIF(" + inv + ",\"$100.000 a $150.000\")+COUNTIF(" + inv + ",\"$150.000 a $250.000\")+COUNTIF(" + inv +
-      ",\"Más de $250.000\"))/COUNTA(" + inv + "),0)" : "-"],
-  ];
-  kpis.forEach(function (k, i) {
-    const row = 4 + i;
-    panel.getRange(row, 1).setValue(k[0]).setFontWeight("bold");
-    const cell = panel.getRange(row, 2);
-    if (String(k[1]).charAt(0) === "=") cell.setFormula(k[1]); else cell.setValue(k[1]);
-    cell.setFontSize(14).setFontWeight("bold").setFontColor("#ff5b1f").setHorizontalAlignment("left");
-  });
+  ["Respuestas", "Con WhatsApp", "Promedio «qué tan cerca están» (1-10)", "Pagarían $100.000 o más al mes"]
+    .forEach(function (label, i) {
+      panel.getRange(4 + i, 1).setValue(label).setFontWeight("bold");
+      panel.getRange(4 + i, 2).setFontSize(14).setFontWeight("bold").setFontColor("#ff5b1f").setHorizontalAlignment("left");
+    });
   panel.getRange(7, 2).setNumberFormat("0%");
 
   // Una tabla + una gráfica por pregunta
-  let row = 10;
-  PANEL_BLOCKS.forEach(function (block) {
-    const range = ref(block.column);
-    if (!range) return;
+  panelLayout_(headers).forEach(function (item) {
+    const block = item.block;
+    const row = item.row;
     const n = block.options.length;
     panel.getRange(row, 1, 1, 3).setValues([[block.title, "Personas", "%"]])
       .setFontWeight("bold").setBackground("#0f2a1d").setFontColor("#f2eee8");
-    block.options.forEach(function (opt, i) {
-      const r = row + 1 + i;
-      const crit = block.contains ? "\"*" + opt + "*\"" : "\"" + opt + "\"";
-      panel.getRange(r, 1).setValue(opt);
-      panel.getRange(r, 2).setFormula("=COUNTIF(" + range + "," + crit + ")");
-      panel.getRange(r, 3).setFormula("=IFERROR(B" + r + "/SUM(B" + (row + 1) + ":B" + (row + n) + "),0)").setNumberFormat("0%");
-    });
+    panel.getRange(row + 1, 1, n, 1).setValues(block.options.map(function (o) { return [o]; }));
+    panel.getRange(row + 1, 3, n, 1).setNumberFormat("0%");
     panel.getRange(row + 1, 1, n, 3).setBackground("#f5f1ea");
 
     const type = { PIE: Charts.ChartType.PIE, BAR: Charts.ChartType.BAR, COLUMN: Charts.ChartType.COLUMN }[block.chart];
@@ -278,7 +298,7 @@ function crearPanel() {
       .setOption("height", 300)
       .build();
     panel.insertChart(chart);
-    row += Math.max(n + 3, 17);
   });
   panel.setFrozenRows(2);
+  updatePanelValues_();
 }
